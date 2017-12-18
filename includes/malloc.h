@@ -47,8 +47,8 @@ typedef struct				s_maps_list
 # define TRUE 1
 # define FALSE 0
 
-# define META_BLOCK_SIZE (sizeof(struct t_block))
-# define META_MLIST_SIZE (sizeof(struct t_mlist))
+# define META_BLOCK_SIZE (sizeof(struct s_block))
+# define META_MLIST_SIZE (sizeof(struct s_mlist))
 
 # define ALIGN_4(x) (((((x) - 1) >> 2) << 2) + 4)
 
