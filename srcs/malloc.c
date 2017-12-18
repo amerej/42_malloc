@@ -63,7 +63,7 @@ t_mlist		*create_map(size_t size, int type)
 
 	int page_size = getpagesize();
 	
-	size_t	full_size = ((((size + META_BLOCK_SIZE) * 100) + (META_MLIST_SIZE / page_size + 1)) * page_size);
+	size_t	full_size = (((((size + META_BLOCK_SIZE) * 100) + META_MLIST_SIZE) / page_size + 1) * page_size);
 
 
 	if ((map = mmap(NULL, full_size, PROT_READ | PROT_WRITE,
