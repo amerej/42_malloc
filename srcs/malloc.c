@@ -16,11 +16,9 @@ g_tab_maps = {NULL, NULL, NULL};
 
 int			get_type(size_t size)
 {
-	if (size == NULL)
-		return (NULL);
 	if (size <= TINY_SIZE)
 		return (TINY);
-	if (size <= SMALL_SIZE)
+	else if (size <= SMALL_SIZE)
 		return (SMALL);
 	else
 		return (LARGE);
@@ -28,33 +26,21 @@ int			get_type(size_t size)
 
 int			get_size(size_t size)
 {
-	if (size == NULL)
-		return (NULL);
 	if (size <= TINY_SIZE)
 		return (TINY_SIZE);
-	if (size <= SMALL_SIZE)
+	else if (size <= SMALL_SIZE)
 		return (SMALL_SIZE);
 	else
 		return (size);
 }
 
-t_mlist		*select_map(t_mlist *list, size_t size, int type)
+t_mlist		*select_map(t_mlist **list, size_t size, int type)
 {
-	t_mlist	*tmp;
-
-	while (list)
-	{
-		if (list->state == TRUE || get_available_space_size(list, size))
-		{
-			tmp = list;
-			list = list->next;
-		}
-		else
-			return list;
-	}
-	//iter list, if no map can handle size, do:
-	tmp->next = create_map(size, type);
-	return(tmp->next);
+	if (!(*list))
+		*list = create_map(size, type);
+	if ((*list)->state == FULL/* || get_available_space_size(list, size)*/)
+		select_map(&(*list)->next, size, type);
+	return (*list);
 }
  
 t_mlist		*create_map(size_t size, int type)
@@ -99,9 +85,12 @@ t_block	*init_block(size_t size, t_mlist *addr)
 	return (block);
 }
 
-move_to_allocable_space(t_mlist **list)
+void	move_to_allocable_space(t_mlist *list)
 {
-	return (*list + META_MLIST_SIZE); // a peu de choses pres
+	t_dlst *lst;
+
+	lst = (void *)list + META_MLIST_SIZE;
+	
 }
 
 t_mlist		*get_map(int type, size_t size)
@@ -114,5 +103,5 @@ void	*malloc(size_t size)
 	t_mlist 	*map;
 	
 	map = get_map(get_type(size), size);
-	move_to_allocable_space(&map);
+	move_to_allocable_space(map);
 }
