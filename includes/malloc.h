@@ -17,13 +17,32 @@
 # include <stdio.h>
 # include <sys/mman.h>
 
-enum	e_type
+# define TRUE 1
+# define FALSE 0
+
+# define TINY_SIZE 16
+# define SMALL_SIZE 512
+
+enum						e_type
 {
 	TINY,
 	SMALL,
 	LARGE,
 	MAX_TYPE
 };
+
+enum						e_state
+{
+	FULL,
+	MAX_TYPE
+};
+
+typedef struct				s_map_data
+{
+		int					map_type;
+		size_t				map_size;
+
+}							t_map_data;
 
 typedef struct				s_block
 {
@@ -32,31 +51,29 @@ typedef struct				s_block
 		struct s_block		*prev;
 		int					free;
 		void				*ptr;
+
 }							t_block;
 
-typedef struct				s_maps_list
+typedef struct				s_map
 {
-	struct s_maplist		*next;
-	int						state;
-	struct t_block			*block;
-}							t_mlist;
+		struct s_map		*next;
+		struct s_block		*block;
+		int					state;
 
-# define TINY_SIZE 16
-# define SMALL_SIZE 512
+}							t_map;
 
-# define TRUE 1
-# define FALSE 0
+typedef struct				s_maps
+{
+		struct s_map		*tiny;
+		struct s_map		*small;
+		struct s_map		*large;
 
-# define EMPTY 0
-# define FULL 1
+}							t_maps;
 
 
-# define META_BLOCK_SIZE (sizeof(struct s_block))
-# define META_MLIST_SIZE (sizeof(struct s_mlist))
+# define BLOCK_SIZE (sizeof(struct s_block))
 
-# define ALIGN_4(x) (((((x) - 1) >> 2) << 2) + 4)
-
-extern t_mlist 				g_tab_maps[MAX_TYPE];
+extern t_maps				maps;
 
 void						*malloc(size_t size);
 int							get_type(size_t size);
