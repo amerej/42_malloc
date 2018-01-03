@@ -34,6 +34,7 @@ enum						e_type
 enum						e_state
 {
 	FULL,
+	FREE,
 	MAX_TYPE
 };
 

@@ -36,67 +36,15 @@ t_map_data		get_map_data(size_t size)
 	return map_data;
 }
 
-// t_mlist		*select_map(t_mlist **list, size_t size, int type)
-// {
-// 	if (!(*list))
-// 		*list = create_map(size, type);
-// 	if ((*list)->state == FULL/* || get_available_space_size(list, size)*/)
-// 		select_map(&(*list)->next, size, type);
-// 	return (*list);
-// }
- 
-// t_mlist		*create_map(size_t size, int type)
-// {
-// 	t_mlist *map;
-
-// 	int page_size = getpagesize();
-	
-// 	size_t	full_size = (((((size + META_BLOCK_SIZE) * 100) + META_MLIST_SIZE) / page_size + 1) * page_size);
-
-
-// 	if ((map = mmap(NULL, full_size, PROT_READ | PROT_WRITE,
-// 		MAP_ANONYMOUS | MAP_PRIVATE, -1, 0)) == MAP_FAILED)
-// 		return (NULL);
-	
-// 	if (g_tab_maps[type] == NULL)
-// 		g_tab_maps[type] = map;
-
-// 	init_map(&map, (full_size - ALIGN_4(sizeof(t_mlist))));	
-	
-// 	return map;
-	
-// }
-
-// init_map(t_mlist **list, size_t size)
-// {
-// 	(*list)->next = NULL;
-// 	(*list)->state = FALSE;
-// 	(*list)->block = init_block(size, *list);
-// }
-
-
-void	move_to_allocable_space(t_mlist *list)
-{
-	t_dlst *lst;
-
-	lst = (void *)list + META_MLIST_SIZE;
-	
-}
-
-t_mlist		*get_map(int type, size_t size)
-{
-	return ((g_tab_maps[type]) ? select_map(g_tab_maps[type], size, type) : create_map(get_size(size), type));
-}
-
 t_block		*init_block(size_t size, t_map *addr)
 {
 	t_block		*block;
 
-	block->size = size;
+	block->size = size - BLOCK_SIZE;
 	block->next = NULL;
 	block->prev = NULL;
 	block->free = TRUE;
-	block->ptr = BLOCK_SIZE + addr;
+	block->ptr = (void *)addr + BLOCK_SIZE;
 
 	return (block);
 }
@@ -143,36 +91,51 @@ t_map		*select_map(t_map_data map_data)
 	return (maps->large);
 }
 
-t_map		*get_map(t_map_data map_data)
+t_map		*get_free_block(t_map **map, t_map_data map_data)
 {
-	t_map	*map_list;
-	t_map	*prev;
-	
-	map_list = select_map(map_data);
+	if (((*map)->block) == NULL)
+		(*map)->state = FULL;
+	else if (((*map)->block->free) == FALSE || (*map)->block->size < (map_data.map_size + BLOCK_SIZE))
+		get_free_block(&(*map)->block->next, map_data);
+	return (*map);
+}
 
-	while (map_list != NULL && (map_list->state != FREE || map_list->state != USABLE))
+void		*get_free_addr(t_map **map, size_t size)
+{
+	if ((*map)->block->free == TRUE && (*map)->block->size <= (size + BLOCK_SIZE))
 	{
-		prev = map_list;
-		map_list = map_list->next;
+		(*map)->block->size = (*map)->block->size - (size - BLOCK_SIZE);
+		(*map)->block->next = NULL;
+		(*map)->block->free = FALSE;
+		(*map)->block->
 	}
-	if (map_list == NULL)
-	{
-		if ((map_list = create_map(map_data.map_size)) == NULL)
+
+}
+
+t_map		*get_free_space(t_map **map, t_map_data map_data, size_t size)
+{
+	if ((*map) == NULL)
+		if ((*map = create_map(map_data.map_size)) == NULL)
 			return (NULL);
-		return (map_list);
-	}
-	return (prev);
+	(*map) = get_free_block(&(*map), map_data);
+	if ((*map)->state == FULL)
+		get_free_space(&(*map)->next, map_data, size);
+	
+	
+	return (*map);
 }
 
 void		*malloc(size_t size)
 {
 	t_map_data		map_data;
+	t_map			*map;
+	void			*addr;
 
 	map_data = get_map_data(size);
 	if (!init_map(map_data))
 		return (NULL);
+	map = select_map(map_data);
+	if ((addr = get_free_space(&map, map_data, size)) == NULL)
+		return (NULL);
 	
-
-	map = get_map(get_type(size), size);
-	move_to_allocable_space(map);
 }
