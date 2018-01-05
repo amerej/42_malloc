@@ -25,21 +25,26 @@ enum	e_type
 	MAX_TYPE
 };
 
+typedef t_bool				char;
+
+// mmap result -> mapping
+
 typedef struct				s_block
 {
 		size_t				size;
-		struct s_block		*next;
-		struct s_block		*prev;
-		int					free;
+		t_bool				free;
 		void				*ptr;
+		struct s_block		*prev;
+		struct s_block		*next;
 }							t_block;
 
-typedef struct				s_maps_list
+// list of mapping for a given type
+typedef struct				s_map
 {
-	struct s_maplist		*next;
-	int						state;
+	size_t					free_space;
 	struct t_block			*block;
-}							t_mlist;
+	struct s_maplist		*next;
+}							t_map;
 
 # define TINY_SIZE 16
 # define SMALL_SIZE 512
@@ -52,13 +57,22 @@ typedef struct				s_maps_list
 
 
 # define META_BLOCK_SIZE (sizeof(struct s_block))
-# define META_MLIST_SIZE (sizeof(struct s_mlist))
+# define META_MAP_SIZE (sizeof(struct s_mlist))
 
 # define ALIGN_4(x) (((((x) - 1) >> 2) << 2) + 4)
 
-extern t_mlist 				g_tab_maps[MAX_TYPE];
+// global types tab
+extern t_map				*g_types_tab[MAX_TYPE];
+
 
 void						*malloc(size_t size);
+
+t_map		 				*get_map(int type, size_t size);
+
+t_block						*init_block(size_t size, t_map *addr);
+
+
 int							get_type(size_t size);
+int							get_size(size_t size);
 
 #endif

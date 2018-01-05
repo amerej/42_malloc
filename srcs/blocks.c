@@ -12,33 +12,15 @@
 
 #include "../includes/malloc.h"
 
-/*
-** TYPEOF(t_map) defined in malloc.h as an extern variable
-** 3 types_tab elems : one for TINY / SMALL / LARGE
-** each types_tab elem contains a list of mmap results (t_block)
-*/
-
-g_types_tab = {NULL, NULL, NULL};
-
-void	move_to_allocable_space(t_map *node)
+t_block	*init_block(size_t size, t_map *addr)
 {
-	t_map *lst;
+	t_block	*block;
 
-	lst = (void *)node + META_MAP_SIZE;
+	block->size = size;
+	block->free = TRUE;
+	block->ptr = (void *)addr + META_BLOCK_SIZE;
+	block->prev = NULL;
+	block->next = NULL;
 
-}
-
-void	*malloc(size_t size)
-{
-	t_map 	*map;
-
-	if (size <= 0)
-		return NULL; // check expected return	
-
-	map = get_map(get_type(size), size); // get the right map to work on
-	if (!map)
-		return NULL;
-
-	move_to_allocable_space(map);
-
+	return (block);
 }

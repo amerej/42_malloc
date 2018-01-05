@@ -18,7 +18,9 @@ NAME = libft_malloc.so
 
 NAME_LINK = libft_malloc_$(HOSTTYPE).so
 
-SRCS = srcs/malloc.c \
+SRCS =	srcs/malloc.c \
+		srcs/maps.c \
+		srcs/utils.c
 
 INC_PATH = includes/
 
