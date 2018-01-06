@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2017/12/17 20:25:45 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/06 19:14:43 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,11 @@
 ** each types_tab elem contains a list of mmap results (t_block)
 */
 
-g_types_tab = {NULL, NULL, NULL};
-
-void	move_to_allocable_space(t_map *node)
-{
-	t_map *lst;
-
-	lst = (void *)node + META_MAP_SIZE;
-
-}
+t_map	*g_types_tab[MAX_TYPE] = {NULL, NULL, NULL};
 
 void	*malloc(size_t size)
 {
-	t_map 	*map_list;
+	t_map 	*map_lst;
 	t_block	*block;
 	int		type;
 
@@ -38,12 +30,15 @@ void	*malloc(size_t size)
 		return (NULL); // check expected return	
 
 	type = get_type(size);
+	size = get_size(size);
 	
-	map_list = get_map_list(type, size); // get the right map to work on
+	map_lst = get_map_lst(type, size); // get the right map type to work on
 	if (!map_lst)
 		return (NULL);
 
-	block = get_block(map_list, type, size);
+	return NULL;
+	block = get_block(map_lst, type, size);
 
+	return (block->ptr);
 	// move_to_allocable_space(map_lst);
 }

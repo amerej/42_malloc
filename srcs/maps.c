@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc.c                                           :+:      :+:    :+:   */
+/*   maps.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2017/12/17 20:25:45 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/06 19:27:27 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
 
-static void     init_map(t_map **map, size_t size, size_t mapsize)
+static void     init_map(t_map **map, size_t mapsize, size_t size)
 {
-	(*map)->free_space = mapsize - META_MAP_SIZE
-	(*map)->block = create_block(map, size);
-	(*map)->block->next = create_block(map, (*map)->free_space)
+	ft_putstr("mapsize: ");
+	ft_putnbr(mapsize);
+	ft_putstr("\nmap starting addr: ");
+	ft_putnbr_hex((long)map);
+	ft_putstr("\n");
+
+	(*map)->free_space = mapsize - MAP_SIZE;
+	(*map)->block = create_block(*map, size, NULL, NULL);
+	(*map)->block->next =
+		create_block(*map, (*map)->free_space, (*map)->block, NULL);
 
 	(*map)->next = NULL;
 }
 
-static t_map		*create_map(int type, size_t size)
+t_map			*create_map(int type, size_t size)
 {
 	t_map	*map;
-
-	size_t	map_size;
+	size_t	psize;
+	size_t	mapsize;
 
 	/*
 	** mapsize formula
@@ -38,23 +45,21 @@ static t_map		*create_map(int type, size_t size)
 	** map / getpagesize = floating number truncated = multiple value
 	*/
 	
-	if (size > getpagesize())
-		map_size = (((size + META_BLOCK_SIZE + META_MAP_SIZE - 1) /
-					page_size + 1) * page_size);
-	else
-		map_size = ((((size + META_BLOCK_SIZE) * 100 + META_MAP_SIZE - 1) /
-				page_size + 1) * page_size);
+	psize = (size_t)getpagesize();
 
-	if ((map = mmap(NULL, map_size, PROT_READ | PROT_WRITE,
+	mapsize = (size > psize) ?
+		((size + BLOCK_SIZE + MAP_SIZE - 1) / psize + 1) * psize :
+		(((size + BLOCK_SIZE) * 100 + MAP_SIZE - 1) / psize + 1) * psize;
+
+	if ((map = mmap(NULL, mapsize, PROT_READ | PROT_WRITE,
 		MAP_ANONYMOUS | MAP_PRIVATE, -1, 0)) == MAP_FAILED)
 		return (NULL);
-	
+
 	// init g_type list if not exist else list is updated in get_block
 	if (g_types_tab[type] == NULL)
 		g_types_tab[type] = map;
 
-	init_map(&map, (map_size - ALIGN_4(sizeof(t_map))), map_size);	
-	
+	init_map(&map, mapsize, size);	
 	return map;	
 }
 
@@ -63,7 +68,7 @@ static t_map		*create_map(int type, size_t size)
 ** @return map to work on.
 */
 
-t_map		    *get_map_list(int type, size_t size)
+t_map		    *get_map_lst(int type, size_t size)
 {
 	return ((g_types_tab[type]) ?
 			g_types_tab[type] :

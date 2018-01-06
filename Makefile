@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+         #
+#    By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/02 15:03:29 by aditsch           #+#    #+#              #
-#    Updated: 2017/12/04 10:45:46 by aditsch          ###   ########.fr        #
+#    Updated: 2018/01/06 17:33:36 by gpoblon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ NAME_LINK = libft_malloc_$(HOSTTYPE).so
 
 SRCS =	srcs/malloc.c \
 		srcs/maps.c \
+		srcs/blocks.c \
 		srcs/utils.c
 
 INC_PATH = includes/
@@ -28,9 +29,7 @@ OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Werror -Wextra -Wall -I$(INC_PATH)
-
-#LDLIBS = -lft -lpthread
+CFLAGS = -Werror -Wextra -Wall -fpic -I$(INC_PATH)
 
 .PHONY: all, clean, fclean, re
 

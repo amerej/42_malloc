@@ -3,7 +3,9 @@
 
 int main (int argc, char** argv)
 {
-	int sz = getpagesize();
-  	printf("%d", sz);
-  	return (0);
+	char *str;
+
+	str = (char *)malloc(5);
+	str = "couc";
+	write(1, "ca marche\n", 10);
 }
