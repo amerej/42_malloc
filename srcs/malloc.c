@@ -30,15 +30,20 @@ void	move_to_allocable_space(t_map *node)
 
 void	*malloc(size_t size)
 {
-	t_map 	*map;
+	t_map 	*map_list;
+	t_block	*block;
+	int		type;
 
 	if (size <= 0)
-		return NULL; // check expected return	
+		return (NULL); // check expected return	
 
-	map = get_map(get_type(size), size); // get the right map to work on
-	if (!map)
-		return NULL;
+	type = get_type(size);
+	
+	map_list = get_map_list(type, size); // get the right map to work on
+	if (!map_lst)
+		return (NULL);
 
-	move_to_allocable_space(map);
+	block = get_block(map_list, type, size);
 
+	// move_to_allocable_space(map_lst);
 }

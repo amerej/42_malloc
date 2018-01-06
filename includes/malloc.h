@@ -31,8 +31,8 @@ typedef t_bool				char;
 
 typedef struct				s_block
 {
-		size_t				size;
 		t_bool				free;
+		size_t				size;
 		void				*ptr;
 		struct s_block		*prev;
 		struct s_block		*next;
@@ -67,9 +67,11 @@ extern t_map				*g_types_tab[MAX_TYPE];
 
 void						*malloc(size_t size);
 
-t_map		 				*get_map(int type, size_t size);
+t_map		 				*get_map_lst(int type, size_t size);
 
-t_block						*init_block(size_t size, t_map *addr);
+t_block						*create_block(t_map **map_list, size_t size);
+t_block						*get_block(t_map *map_list, int type, size_t size);
+
 
 
 int							get_type(size_t size);
