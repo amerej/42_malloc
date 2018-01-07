@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:39:37 by aditsch           #+#    #+#             */
-/*   Updated: 2018/01/07 01:22:46 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/07 02:48:31 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/mman.h>
+# include <stdlib.h>
 
 enum	e_type
 {

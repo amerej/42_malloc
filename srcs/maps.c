@@ -6,25 +6,27 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/07 01:00:32 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/07 03:06:16 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
 
-static void     init_map(t_map **map, size_t mapsize, size_t size)
+static void     init_map(t_map **map, size_t mapsize)
 {
-	ft_putstr("\n\nFUN init_map");	
-	ft_putstr("\nmapsize: ");
-	ft_putnbr(mapsize);
-	ft_putstr("\nmap starting addr: ");
+	ft_putstr("\n\nFUN init_map + INFOS");	
+	ft_putstr("\nmap starting addr = ");
 	ft_putnbr_hex((long)*map);
+	ft_putstr(", mapsize = ");
+	ft_putnbr(mapsize);
+	ft_putstr(", BLOCK_SIZE = ");
+	ft_putnbr(BLOCK_SIZE);
+	ft_putstr(", MAP_SIZE = ");
+	ft_putnbr(MAP_SIZE);	
 
 	(*map)->free_space = mapsize - MAP_SIZE;
-	(*map)->block = create_block(*map, size, NULL, NULL);
-	// (*map)->block->next =
-	// 	create_block(*map, (*map)->free_space - BLOCK_SIZE, (*map)->block, NULL);
-
+	(*map)->block =
+		create_block(*map, mapsize - MAP_SIZE - BLOCK_SIZE, NULL, NULL);
 	(*map)->next = NULL;
 }
 
@@ -60,7 +62,7 @@ t_map			*create_map(int type, size_t size)
 	if (g_types_tab[type] == NULL)
 		g_types_tab[type] = map;
 
-	init_map(&map, mapsize, size);	
+	init_map(&map, mapsize);	
 	return map;	
 }
 

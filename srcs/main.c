@@ -39,22 +39,17 @@ void	ft_putstr(char *str)
 int main (int argc, char** argv)
 {
 	char *str;
-	char *str2;
+	// char *str2;
 
-	str = (char *)malloc(7);
-	str = "coucou";
-	ft_putstr("\n");
-	ft_putstr(str);
-	ft_putstr("\n&addr str allouée par malloc: ");
-	ft_putnbr_hex((size_t)str);
-	ft_putstr("\n");
-
-	str2 = (char *)malloc(12);
-	str2 = "YO BRO CA VA?";
-	ft_putstr("\n");
-	ft_putstr(str2);
-	ft_putstr("\n&addr str allouée par malloc: ");
-	ft_putnbr_hex((size_t)str2);
-	ft_putstr("\n");
-
+	int i = 0;
+	while (i < 50)
+	{
+		str = (char *)malloc(rand());
+		// ft_putstr("\n");
+		// ft_putstr(str);
+		// ft_putstr("\n&addr str allouée par malloc: ");
+		// ft_putnbr_hex((long)str);
+		// ft_putstr("\n");
+		++i;
+	}
 }
