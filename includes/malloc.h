@@ -43,6 +43,7 @@ typedef struct				s_block
 typedef struct				s_map
 {
 	size_t					free_space;
+	size_t					page_count;
 	struct s_block			*block;
 	struct s_map			*next;
 }							t_map;

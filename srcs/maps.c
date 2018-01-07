@@ -25,6 +25,7 @@ static void     init_map(t_map **map, size_t mapsize)
 	ft_putnbr(MAP_SIZE);	
 
 	(*map)->free_space = mapsize - MAP_SIZE;
+	(*map)->page_count = mapsize / getpagesize();
 	(*map)->block =
 		create_block(*map, mapsize - MAP_SIZE - BLOCK_SIZE, NULL, NULL);
 	(*map)->next = NULL;
@@ -62,8 +63,8 @@ t_map			*create_map(int type, size_t size)
 	if (g_types_tab[type] == NULL)
 		g_types_tab[type] = map;
 
-	init_map(&map, mapsize);	
-	return map;	
+	init_map(&map, mapsize);
+	return map;
 }
 
 /*
