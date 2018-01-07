@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/06 19:27:27 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/07 01:00:32 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static void     init_map(t_map **map, size_t mapsize, size_t size)
 {
-	ft_putstr("mapsize: ");
+	ft_putstr("\n\nFUN init_map");	
+	ft_putstr("\nmapsize: ");
 	ft_putnbr(mapsize);
 	ft_putstr("\nmap starting addr: ");
-	ft_putnbr_hex((long)map);
-	ft_putstr("\n");
+	ft_putnbr_hex((long)*map);
 
 	(*map)->free_space = mapsize - MAP_SIZE;
 	(*map)->block = create_block(*map, size, NULL, NULL);
-	(*map)->block->next =
-		create_block(*map, (*map)->free_space, (*map)->block, NULL);
+	// (*map)->block->next =
+	// 	create_block(*map, (*map)->free_space - BLOCK_SIZE, (*map)->block, NULL);
 
 	(*map)->next = NULL;
 }
@@ -34,6 +34,7 @@ t_map			*create_map(int type, size_t size)
 	size_t	psize;
 	size_t	mapsize;
 
+	ft_putstr("\n\nFUN create_map");
 	/*
 	** mapsize formula
 	** 100 * -> rule given by the subject: mmap must be at least 100 * size +
@@ -70,6 +71,8 @@ t_map			*create_map(int type, size_t size)
 
 t_map		    *get_map_lst(int type, size_t size)
 {
+	ft_putstr("\n\nFUN get_map_lst");
+	
 	return ((g_types_tab[type]) ?
 			g_types_tab[type] :
 			create_map(type, size));

@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/06 19:14:43 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/07 01:25:21 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	*malloc(size_t size)
 	t_block	*block;
 	int		type;
 
+	ft_putstr("\n\nFUN MAIN MALLOC IN");
+
 	if (size <= 0)
 		return (NULL); // check expected return	
 
@@ -36,9 +38,14 @@ void	*malloc(size_t size)
 	if (!map_lst)
 		return (NULL);
 
-	return NULL;
 	block = get_block(map_lst, type, size);
 
+	ft_putstr("\n\nmalloc return -- \n\n&block: ");
+	ft_putnbr_hex((long)block);
+	ft_putstr(" AND ret_value (&ptr) = ");
+	ft_putnbr_hex((long)block->ptr);
+	ft_putstr("\n");
+	
 	return (block->ptr);
 	// move_to_allocable_space(map_lst);
 }
