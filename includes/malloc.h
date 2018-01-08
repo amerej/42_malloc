@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:39:37 by aditsch           #+#    #+#             */
-/*   Updated: 2017/12/17 20:25:31 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/01/07 12:48:23 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # define TRUE 1
 # define FALSE 0
+# define ZERO 0
 
 # define TINY_SIZE 16
 # define SMALL_SIZE 512
@@ -38,12 +39,13 @@ enum						e_state
 	MAX_TYPE
 };
 
-typedef struct				s_map_data
+typedef struct				s_alloc_data
 {
-		int					map_type;
-		size_t				map_size;
+		int					type;
+		size_t				size;
+		size_t				req_size;
 
-}							t_map_data;
+}							t_alloc_data;
 
 typedef struct				s_block
 {
@@ -77,6 +79,5 @@ typedef struct				s_maps
 extern t_maps				maps;
 
 void						*malloc(size_t size);
-int							get_type(size_t size);
 
 #endif
