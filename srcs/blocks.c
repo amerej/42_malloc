@@ -25,7 +25,7 @@ static void		print_map_blocks(t_map *map)
 	while (block)
 	{
 		
-		ft_putstr("\n&block: ");
+		ft_putstr("\n\n&block: ");
 		ft_putnbr_hex((long)block);
 		block->free ? ft_putstr("\nfree = TRUE") : ft_putstr("\nfree = FALSE");
 		ft_putstr("\nbprev: ");
@@ -34,7 +34,7 @@ static void		print_map_blocks(t_map *map)
 		ft_putnbr_hex((long)block->next);
 		ft_putstr("\nsize: ");
 		ft_putnbr(block->size);
-		ft_putstr("\n\nblock->ptr = ");
+		ft_putstr("\nblock->ptr = ");
 		ft_putstr((char*)block->ptr);
 
 		block = block->next;

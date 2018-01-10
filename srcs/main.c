@@ -36,20 +36,37 @@ void	ft_putstr(char *str)
 	write(1, str, i);
 }
 
+void	ft_strlcpy(char *str, int len)
+{
+	int		i = 0;
+
+	while (i < len)
+	{
+		str[i] = 'a';
+		i++;
+	}
+	str[i] = '\0';
+}
+
 int main (int argc, char** argv)
 {
 	char *str;
-	// char *str2;
 
 	int i = 0;
-	while (i < 5)
+	int	random = 0;
+	while (i < 1)
 	{
-		str = (char *)malloc(rand());
-		// ft_putstr("\n");
-		// ft_putstr(str);
-		ft_putstr("\n&addr str allouée par malloc: ");
-		ft_putnbr_hex((long)str);
-		// ft_putstr("\n");
+		random = rand();
+		str = (char *)malloc(random);
+
+		ft_strlcpy(str, random);
+		
+		ft_putstr("\nSTR VALUE AFTER MALLOC (");
+		ft_putnbr(random);
+		ft_putstr(") ->>>>>>>>>>>>> ");
+		ft_putstr(str);
+		ft_putstr("\n");
+		
 		++i;
 	}
 }
