@@ -42,13 +42,13 @@ int main (int argc, char** argv)
 	// char *str2;
 
 	int i = 0;
-	while (i < 50)
+	while (i < 5)
 	{
 		str = (char *)malloc(rand());
 		// ft_putstr("\n");
 		// ft_putstr(str);
-		// ft_putstr("\n&addr str allouée par malloc: ");
-		// ft_putnbr_hex((long)str);
+		ft_putstr("\n&addr str allouée par malloc: ");
+		ft_putnbr_hex((long)str);
 		// ft_putstr("\n");
 		++i;
 	}

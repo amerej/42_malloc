@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/07 02:59:00 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/07 13:23:00 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	*malloc(size_t size)
 
 	block = get_block(map_lst, type, size);
 
-	ft_putstr("\nmalloc return -- &block: ");
-	ft_putnbr_hex((long)block);
+	ft_putstr("\nmalloc return -- &block->ptr: ");
+	ft_putnbr_hex((long)block->ptr);
 	ft_putstr("\n**********************************\n");
 	
 	return (block->ptr);
