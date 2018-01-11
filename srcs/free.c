@@ -12,61 +12,87 @@
 
 #include "../includes/malloc.h"
 
-static void		update_map(t_block *block)
+static void		update_map_blocks(t_block *block)
 {
-	if (block->next && block->next->free == TRUE)
-		block->next = block->next->next;
-	if (block->prev && block->prev->free == TRUE)
+	ft_putstr("\nUPDATE MAP BLOCKS");
+
+	if (block->free == TRUE && block->next && block->next->free == TRUE)
 	{
-		block->prev->size = block->prev->size + block->size + BLOCK_SIZE;
- 		block->prev->next = block->next;
+		ft_putstr("\nUPDATE IN IF");
+		block->size += block->next->size + BLOCK_SIZE;
+		block->next = block->next->next;
+		if (block->next)
+			block->next->prev = block;
+		ft_putstr("\nUPDATE END IF");		
 	}
 }
 
-static void		browse_map(t_map *map, t_block *to_free, t_map *prev_map, )
+static void		mumnmap_and_update_maps(t_map *map, t_map *prev_map)
 {
-	t_bool	to_unmap;
+	size_t		map_full_size;
 
-	to_unmap = TRUE;
-	while (block)
+	map_full_size = map->block->size + BLOCK_SIZE + MAP_SIZE;
+	
+	munmap(map, map_full_size);
+
+	if (prev_map)
+		prev_map->next = map->next;
+	else
+		map = map->next;
+}
+
+static void		browse_map(t_map *map, t_block *to_free, t_map *prev_map)
+{
+	t_block		*it_block;
+
+	to_free->free = TRUE;
+
+	ft_putstr("\nBROWSE MAP &block TO FREE");
+	ft_putnbr_hex((long)to_free);
+
+	it_block = map->block;
+	while (it_block)
 	{
-		if (block == to_free)
+		ft_putstr("\nBROWSE MAP it_block");
+		ft_putnbr_hex((long)it_block);
+
+		update_map_blocks(it_block);
+
+		ft_putstr("\nBROWSE MAP after update");
+		if (!it_block->next && map->block == it_block) // NE RENTRE PAS DANS LA CDT
 		{
-			map->free_space = map->free->space + BLOCK_SIZE;
-			update_map(block);
+			ft_putstr("\nBROWSE MAP IF MUNMAP map:");
+			ft_putnbr_hex((long)map);
+			
+			mumnmap_and_update_maps(map, prev_map);
+			ft_putstr("\nBROWSE MAP ENDIF MUNMAP: map freed");
+			ft_putnbr_hex((long)map);	
 		}
-		else if (block->free == FALSE)
-			to_unmap = FALSE;
-		block = block->next;
+		it_block = it_block->next;
 	}
-
-	if (to_unmap == TRUE)
-	{
-		munmap(map, sizeof(map));
-		(map_prev) ? map_prev->next = map->next : map = map->next;
-	}
+	ft_putstr("\nBROWSE MAP ::: END");
 }
 
 void    free(void *ptr)
 {
-	t_block     *block;
 	t_map		*map;
 	t_map		*prev_map;
 	int			types;
 
 	types = 0;
 	prev_map = NULL;
-	while (map = g_types_tab[types++])
+	while ((map = g_types_tab[types++]))
 	{
-		while (map)
+		// ft_putstr("\nFREE WHILE map = g_types");
+		// ft_putnbr_hex((long)map);
+		if ((long)map == ((long)ptr & 0xFFFFFF000))
 		{
-			if (map == (ptr & 0xFFFFFF000))
-			{
-				browse_map(map, (void*)ptr - BLOCK_SIZE, prev_map);
-				return;
-			}
-			prev_map = map;
-			map = map->next;
+			ft_putstr("\nFREE IF GOOD map FOUND !!!");
+			ft_putnbr_hex((long)map->block);	
+			browse_map(map, (void*)ptr - BLOCK_SIZE, prev_map);
+			return;
 		}
+		prev_map = map;
+		map = map->next;
 	}
 }

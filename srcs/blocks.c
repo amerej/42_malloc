@@ -25,17 +25,17 @@ static void		print_map_blocks(t_map *map)
 	while (block)
 	{
 		
-		ft_putstr("\n\n&block: ");
-		ft_putnbr_hex((long)block);
-		block->free ? ft_putstr("\nfree = TRUE") : ft_putstr("\nfree = FALSE");
-		ft_putstr("\nbprev: ");
-		ft_putnbr_hex((long)block->prev);	
-		ft_putstr("\nnext: ");
-		ft_putnbr_hex((long)block->next);
-		ft_putstr("\nsize: ");
-		ft_putnbr(block->size);
-		ft_putstr("\nblock->ptr = ");
-		ft_putstr((char*)block->ptr);
+		// ft_putstr("\n\n&block: ");
+		// ft_putnbr_hex((long)block);
+		// block->free ? ft_putstr("\nfree = TRUE") : ft_putstr("\nfree = FALSE");
+		// ft_putstr("\nbprev: ");
+		// ft_putnbr_hex((long)block->prev);	
+		// ft_putstr("\nnext: ");
+		// ft_putnbr_hex((long)block->next);
+		// ft_putstr("\nsize: ");
+		// ft_putnbr(block->size);
+		// ft_putstr("\nblock->ptr = ");
+		// ft_putstr((char*)block->ptr);
 
 		block = block->next;
 		// if (++i > 3) exit(0);
@@ -62,14 +62,14 @@ static t_block	*get_fiteable_block(t_map *map, int type, size_t size)
 
 static void		update_map_blocks(t_map *map, t_block *block, size_t size)
 {
-	ft_putstr("\n\n@@@FUN update map blocks\nblock = ");
-	ft_putnbr_hex((long)block);
-	ft_putstr(", prev = ");
-	ft_putnbr_hex((long)block->prev);
-	ft_putstr(", next = ");
-	ft_putnbr_hex((long)block->next);
-	ft_putstr(", size = ");
-	ft_putnbr((long)block->size);
+	// ft_putstr("\n\n@@@FUN update map blocks\nblock = ");
+	// ft_putnbr_hex((long)block);
+	// ft_putstr(", prev = ");
+	// ft_putnbr_hex((long)block->prev);
+	// ft_putstr(", next = ");
+	// ft_putnbr_hex((long)block->next);
+	// ft_putstr(", size = ");
+	// ft_putnbr((long)block->size);
 
 	map->free_space = map->free_space - (size + BLOCK_SIZE);	
 	
@@ -89,16 +89,16 @@ t_block     	*create_block(t_map *map, size_t size, t_block *prev_block,
 	if (!prev_block) block = (void *)map + MAP_SIZE;
 	else block = (void *)prev_block + BLOCK_SIZE + prev_block->size;
 
-	ft_putstr("\nblock = ");
-	ft_putnbr_hex((long)block);
-	ft_putstr(", bprev = ");
-	ft_putnbr_hex((long)prev_block);	
-	ft_putstr(", bnext = ");
-	ft_putnbr_hex((long)next_block);
-	ft_putstr(", size = ");	
-	ft_putnbr(size);
-	ft_putstr(", map->free_space = ");	
-	ft_putnbr(map->free_space);
+	// ft_putstr("\nblock = ");
+	// ft_putnbr_hex((long)block);
+	// ft_putstr(", bprev = ");
+	// ft_putnbr_hex((long)prev_block);	
+	// ft_putstr(", bnext = ");
+	// ft_putnbr_hex((long)next_block);
+	// ft_putstr(", size = ");	
+	// ft_putnbr(size);
+	// ft_putstr(", map->free_space = ");	
+	// ft_putnbr(map->free_space);
 	
 	block->free = TRUE;
 	block->size = size;

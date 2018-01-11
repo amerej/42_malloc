@@ -14,15 +14,15 @@
 
 static void     init_map(t_map **map, size_t mapsize)
 {
-	ft_putstr("\n\nFUN init_map + INFOS");	
-	ft_putstr("\nmap starting addr = ");
-	ft_putnbr_hex((long)*map);
-	ft_putstr(", mapsize = ");
-	ft_putnbr(mapsize);
-	ft_putstr(", BLOCK_SIZE = ");
-	ft_putnbr(BLOCK_SIZE);
-	ft_putstr(", MAP_SIZE = ");
-	ft_putnbr(MAP_SIZE);	
+	// ft_putstr("\n\nFUN init_map + INFOS");	
+	// ft_putstr("\nmap starting addr = ");
+	// ft_putnbr_hex((long)*map);
+	// ft_putstr(", mapsize = ");
+	// ft_putnbr(mapsize);
+	// ft_putstr(", BLOCK_SIZE = ");
+	// ft_putnbr(BLOCK_SIZE);
+	// ft_putstr(", MAP_SIZE = ");
+	// ft_putnbr(MAP_SIZE);	
 
 	(*map)->free_space = mapsize - MAP_SIZE;
 	(*map)->page_count = mapsize / getpagesize();

@@ -54,9 +54,10 @@ int main (int argc, char** argv)
 
 	int i = 0;
 	int	random = 0;
-	while (i < 1)
+	ft_putstr(">>> MAIN <<<");	
+	while (i < 5)
 	{
-		random = rand();
+		random = 5; //rand();
 		str = (char *)malloc(random);
 
 		ft_strlcpy(str, random);
@@ -66,6 +67,8 @@ int main (int argc, char** argv)
 		ft_putstr(") ->>>>>>>>>>>>> ");
 		ft_putstr(str);
 		ft_putstr("\n");
+
+		free(str);
 		
 		++i;
 	}
