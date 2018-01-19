@@ -26,7 +26,7 @@ void	*malloc(size_t size)
 	t_block	*block;
 	int		type;
 
-	ft_putstr("\nFUN MAIN - MALLOC");
+	ft_putstr("\nf(MAIN)");
 
 	if (size <= 0)
 		return (NULL); // check expected return	
@@ -41,9 +41,8 @@ void	*malloc(size_t size)
 	block = get_block(map_lst, type, size);
 
 	ft_putstr("\nmalloc return -- &block->ptr: ");
-	ft_putnbr_hex((long)block->ptr);
-	ft_putstr("\n**********************************\n");
+	ft_putnbr_base((long)block->ptr, 16);
+	ft_putstr("\n");
 	
 	return (block->ptr);
-	// move_to_allocable_space(map_lst);
 }

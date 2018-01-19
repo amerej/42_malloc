@@ -22,7 +22,8 @@ SRCS =	srcs/malloc.c \
 		srcs/free.c \
 		srcs/maps.c \
 		srcs/blocks.c \
-		srcs/utils.c
+		srcs/utils.c \
+		srcs/show_alloc_mem.c
 
 INC_PATH = includes/
 

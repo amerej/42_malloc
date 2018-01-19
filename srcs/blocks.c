@@ -12,43 +12,11 @@
 
 #include "../includes/malloc.h"
 
-// only for testing purpose
-static void		print_map_blocks(t_map *map)
-{
-	t_block	*block;
-	
-	block = map->block;
-	ft_putstr("\n\n-----------------------------\nFUN PRINT MAP BLOCKS -- &map: ");
-	ft_putnbr_hex((long)map);
-
-	// int i = 0;
-	while (block)
-	{
-		
-		// ft_putstr("\n\n&block: ");
-		// ft_putnbr_hex((long)block);
-		// block->free ? ft_putstr("\nfree = TRUE") : ft_putstr("\nfree = FALSE");
-		// ft_putstr("\nbprev: ");
-		// ft_putnbr_hex((long)block->prev);	
-		// ft_putstr("\nnext: ");
-		// ft_putnbr_hex((long)block->next);
-		// ft_putstr("\nsize: ");
-		// ft_putnbr(block->size);
-		// ft_putstr("\nblock->ptr = ");
-		// ft_putstr((char*)block->ptr);
-
-		block = block->next;
-		// if (++i > 3) exit(0);
-	}
-
-	ft_putstr("\n-----------------------------\n");
-}
-
 static t_block	*get_fiteable_block(t_map *map, int type, size_t size)
 {
 	t_block	*block;
 
-	ft_putstr("\n\nFUN get fiteable block");
+	ft_putstr("\nf(get fiteable block)");
 	block = map->block;
 	while (block)
 	{
@@ -62,14 +30,15 @@ static t_block	*get_fiteable_block(t_map *map, int type, size_t size)
 
 static void		update_map_blocks(t_map *map, t_block *block, size_t size)
 {
-	// ft_putstr("\n\n@@@FUN update map blocks\nblock = ");
-	// ft_putnbr_hex((long)block);
+	ft_putstr("\nf(update map blocks)");
+	// ft_putnbr_base("\nblock = ", 16);
+	// ft_putnbr_base((long)block, 16);
 	// ft_putstr(", prev = ");
-	// ft_putnbr_hex((long)block->prev);
+	// ft_putnbr_base((long)block->prev, 16);
 	// ft_putstr(", next = ");
-	// ft_putnbr_hex((long)block->next);
+	// ft_putnbr_base((long)block->next, 16);
 	// ft_putstr(", size = ");
-	// ft_putnbr((long)block->size);
+	// ft_putnbr((long)block->size, 10);
 
 	map->free_space = map->free_space - (size + BLOCK_SIZE);	
 	
@@ -84,21 +53,21 @@ t_block     	*create_block(t_map *map, size_t size, t_block *prev_block,
 {
 	t_block	*block;
 
-	ft_putstr("\n\nFUN create block");
+	ft_putstr("\nf(create block)");
 
 	if (!prev_block) block = (void *)map + MAP_SIZE;
 	else block = (void *)prev_block + BLOCK_SIZE + prev_block->size;
 
 	// ft_putstr("\nblock = ");
-	// ft_putnbr_hex((long)block);
+	// ft_putnbr_base((long)block, 16);
 	// ft_putstr(", bprev = ");
-	// ft_putnbr_hex((long)prev_block);	
+	// ft_putnbr_base((long)prev_block, 16);	
 	// ft_putstr(", bnext = ");
-	// ft_putnbr_hex((long)next_block);
+	// ft_putnbr_base((long)next_block, 16);
 	// ft_putstr(", size = ");	
-	// ft_putnbr(size);
+	// ft_putnbr(size, 10);
 	// ft_putstr(", map->free_space = ");	
-	// ft_putnbr(map->free_space);
+	// ft_putnbr(map->free_space, 10);
 	
 	block->free = TRUE;
 	block->size = size;
@@ -117,20 +86,16 @@ t_block		    *get_block(t_map *map, int type, size_t size)
 	t_block		*block;
 	t_map		*cur_map;
 
-	ft_putstr("\n\nFUN get block");
+	ft_putstr("\nf(get block)");
 
 	block = NULL;
 
 	while (map) // si on ajoute get_map en wrapper on peut faire get_map en recursive, + propre
 	{
-		ft_putstr("\n&map: ");
-		ft_putnbr_hex((long)map);
-
 		if (map->free_space >= (size + BLOCK_SIZE) &&
 			(block = get_fiteable_block(map, type, size)))
 		{
 			update_map_blocks(map, block, size);
-			print_map_blocks(map);
 			return block;
 		}
 		cur_map = map;

@@ -1,4 +1,4 @@
-	/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
@@ -48,13 +48,13 @@ static void		browse_map(t_map *map, t_block *to_free, t_map *prev_map)
 	to_free->free = TRUE;
 
 	ft_putstr("\nBROWSE MAP &block TO FREE");
-	ft_putnbr_hex((long)to_free);
+	ft_putnbr_base((long)to_free, 16);
 
 	it_block = map->block;
 	while (it_block)
 	{
 		ft_putstr("\nBROWSE MAP it_block");
-		ft_putnbr_hex((long)it_block);
+		ft_putnbr_base((long)it_block, 16);
 
 		update_map_blocks(it_block);
 
@@ -62,11 +62,11 @@ static void		browse_map(t_map *map, t_block *to_free, t_map *prev_map)
 		if (!it_block->next && map->block == it_block) // NE RENTRE PAS DANS LA CDT
 		{
 			ft_putstr("\nBROWSE MAP IF MUNMAP map:");
-			ft_putnbr_hex((long)map);
+			ft_putnbr_base((long)map, 16);
 			
 			mumnmap_and_update_maps(map, prev_map);
 			ft_putstr("\nBROWSE MAP ENDIF MUNMAP: map freed");
-			ft_putnbr_hex((long)map);	
+			ft_putnbr_base((long)map, 16);	
 		}
 		it_block = it_block->next;
 	}
@@ -84,11 +84,11 @@ void    free(void *ptr)
 	while ((map = g_types_tab[types++]))
 	{
 		// ft_putstr("\nFREE WHILE map = g_types");
-		// ft_putnbr_hex((long)map);
+		// ft_putnbr_base((long)map, 16);
 		if ((long)map == ((long)ptr & 0xFFFFFF000))
 		{
 			ft_putstr("\nFREE IF GOOD map FOUND !!!");
-			ft_putnbr_hex((long)map->block);	
+			ft_putnbr_base((long)map->block, 16);	
 			browse_map(map, (void*)ptr - BLOCK_SIZE, prev_map);
 			return;
 		}

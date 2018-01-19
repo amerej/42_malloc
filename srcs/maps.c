@@ -14,15 +14,15 @@
 
 static void     init_map(t_map **map, size_t mapsize)
 {
-	// ft_putstr("\n\nFUN init_map + INFOS");	
+	ft_putstr("\nf(init_map)");	
 	// ft_putstr("\nmap starting addr = ");
-	// ft_putnbr_hex((long)*map);
+	// ft_putnbr_base((long)*map, 16);
 	// ft_putstr(", mapsize = ");
-	// ft_putnbr(mapsize);
+	// ft_putnbr(mapsize, 10);
 	// ft_putstr(", BLOCK_SIZE = ");
-	// ft_putnbr(BLOCK_SIZE);
+	// ft_putnbr(BLOCK_SIZE, 10);
 	// ft_putstr(", MAP_SIZE = ");
-	// ft_putnbr(MAP_SIZE);	
+	// ft_putnbr(MAP_SIZE, 10);	
 
 	(*map)->free_space = mapsize - MAP_SIZE;
 	(*map)->page_count = mapsize / getpagesize();
@@ -37,7 +37,7 @@ t_map			*create_map(int type, size_t size)
 	size_t	psize;
 	size_t	mapsize;
 
-	ft_putstr("\n\nFUN create_map");
+	ft_putstr("\nf(create_map)");
 	/*
 	** mapsize formula
 	** 100 * -> rule given by the subject: mmap must be at least 100 * size +
@@ -74,7 +74,7 @@ t_map			*create_map(int type, size_t size)
 
 t_map		    *get_map_lst(int type, size_t size)
 {
-	ft_putstr("\n\nFUN get_map_lst");
+	ft_putstr("\nf(get_map_lst)");
 	
 	return ((g_types_tab[type]) ?
 			g_types_tab[type] :

@@ -81,7 +81,8 @@ int							get_type(size_t size);
 int							get_size(size_t size);
 
 void						ft_putstr(char *str);
-void						ft_putnbr_hex(long n);
-void						ft_putnbr(long n);
+void						ft_putnbr_base(long n, int base);
+
+void						show_alloc_mem(void);
 
 #endif
