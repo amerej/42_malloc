@@ -12,61 +12,60 @@
 
 #include "malloc.h"
 
-static void	print_maps_and_blocks(t_map *map)
+static void		print_blocks(t_block *block)
 {
-	t_block	*block;
-	if (map)
-	{
-		block = map->block;
-		while (block)
-		{
-			ft_putstr("H: 0x");			
-			ft_putnbr_base((long)block, 16);
-			ft_putstr(" => B: 0x");
-			ft_putnbr_base((long)block->ptr, 16);
-			ft_putstr(" - 0x");
-			ft_putnbr_base((long)(block->ptr + block->size), 16);
-			ft_putstr(" : ");
-			ft_putnbr_base(block->size, 10);
-			ft_putstr(" octets\n");
-			block = block->next;
-		}
-	}
+	ft_putstr("H: 0x");			
+	ft_putnbr_base((long)block, 16);
+	ft_putstr(" => B: 0x");
+	ft_putnbr_base((long)block->ptr, 16);
+	ft_putstr(" - 0x");
+	ft_putnbr_base((long)(block->ptr + block->size), 16);
+	ft_putstr(" : ");
+	ft_putnbr_base(block->size, 10);
+	ft_putstr(" octets, ");
+	(block->free) ? ft_putstr("free: TRUE\n") : ft_putstr("free: FALSE\n");
+	if (block->next)
+		print_blocks(block->next);
+}
+
+static void		print_maps(t_map *map)
+{
+	if (map->block)
+		print_blocks(map->block);
+	else
+		ft_putstr("THERE MUST BE AN ERROR: NO EXISTING BLOCKS IN MAP\n");	
 	if (map->next)
-		print_maps_and_blocks(map->next);
+		print_maps(map->next);
+}
+
+static t_bool	print_header(t_map *head, char *str_type)
+{
+	if (!head)
+	{
+		ft_putstr(str_type);
+		ft_putstr(" : NULL, no allocated map\n");
+		return FALSE;
+	}
+	ft_putstr(str_type);
+	ft_putstr(": 0x");
+	ft_putnbr_base((long)head, 16);
+	ft_putstr("\n");
+	return TRUE;
 }
 
 static void	print_alloc_mem_type(int type, char *str_type)
 {
-	/*
-	**	print header
-	*/
-	if (!g_types_tab[type])
-	{
-		ft_putstr(str_type);
-		ft_putstr(" : NULL, no allocated map\n");
+	if (!print_header(g_types_tab[type], str_type))
 		return;
-	}
-	ft_putstr(str_type);
-	ft_putstr(": 0x");
-	ft_putnbr_base((long)g_types_tab[type], 16);
-	ft_putstr("\n");
-
-	/*
-	**	print body: maps and blocks
-	**	just keep last line, if/else = debug
-	*/
-	if (!(g_types_tab[type])->block)
-		ft_putstr("THERE MUST BE AN ERROR: NO EXISTING BLOCKS\n");
-	else
-		print_maps_and_blocks(g_types_tab[type]);
+	print_maps(g_types_tab[type]);
 }
 
 void		show_alloc_mem(void)
 {
+	ft_putstr("\n");	
 	print_alloc_mem_type(TINY, "TINY");
 	ft_putstr("\n");	
 	print_alloc_mem_type(SMALL, "SMALL");
-	ft_putstr("\n");	
+	ft_putstr("\n");
 	print_alloc_mem_type(LARGE, "LARGE");
 }

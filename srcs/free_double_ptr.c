@@ -30,25 +30,25 @@ static void		update_map_blocks(t_block *block)
 	}
 }
 
-static void		mumnmap_and_update_maps(t_map *map, t_map *prev_map)
+static void		mumnmap_and_update_maps(t_map **map, t_map **prev_map)
 {
 	size_t		map_full_size;
 	t_map		*tmp_map;
 
-	tmp_map = map;
+	tmp_map = (*map);
 	ft_putstr("\nf(munmap_and_update_maps)\naddr: ");
-	ft_putnbr_base((long)map, 16);	
-	map_full_size = map->block->size + BLOCK_SIZE + MAP_SIZE;
-	// if (prev_map)
-	// 	prev_map->next = map->next;
+	ft_putnbr_base((long)(*map), 16);	
+	map_full_size = (*map)->block->size + BLOCK_SIZE + MAP_SIZE;
+	if (prev_map)
+		(*prev_map)->next = (*map)->next;
 	// else
 	// 	map = map->next;
-	g_types_tab[TINY] = NULL;
 
+	(*map) = NULL;
 	munmap(tmp_map, map_full_size);
 }
 
-static void		browse_map(t_map *map, t_block *to_free, t_map *prev_map)
+static void		browse_map(t_map **map, t_block *to_free, t_map **prev_map)
 {
 	t_block		*block;
 
@@ -57,7 +57,7 @@ static void		browse_map(t_map *map, t_block *to_free, t_map *prev_map)
 	ft_putstr("\nf(browse_map), ptr to free: ");
 	ft_putnbr_base((long)to_free, 16);
 
-	block = map->block;
+	block = (*map)->block;
 	while (block)
 	{
 		update_map_blocks(block);
@@ -65,10 +65,10 @@ static void		browse_map(t_map *map, t_block *to_free, t_map *prev_map)
 		ft_putstr("\nblock: ");
 		ft_putnbr_base((long)block, 16);
 		ft_putstr(" <> map->block: ");
-		ft_putnbr_base((long)map->block, 16);
-		if (block->free && !block->next && block == map->block) // NE RENTRE PAS DANS LA CDT
+		ft_putnbr_base((long)(*map->block, 16);
+		if (block->free && !block->next && block == (*map)->block) // NE RENTRE PAS DANS LA CDT
 		{
-			mumnmap_and_update_maps(map, prev_map);
+			mumnmap_and_update_maps(*map, *prev_map);
 			ft_putstr("\nBM: map freed");
 			return;
 		}
@@ -93,7 +93,7 @@ void    free(void *ptr)
 			ft_putstr("\nmap found: ");
 			ft_putnbr_base((long)map, 16);	
 
-			browse_map(map, (void*)ptr - BLOCK_SIZE, prev_map);
+			browse_map(&map, (void*)ptr - BLOCK_SIZE, &prev_map);
 			return;
 		}
 		prev_map = map;
