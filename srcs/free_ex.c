@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   free_ex.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/07 03:06:16 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/21 19:34:44 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,34 +30,44 @@ static void		update_map_blocks(t_block *block)
 	}
 }
 
-static void		mumnmap_and_update_maps(t_map **map, t_map **prev_map)
+static void		mumnmap_and_update_maps(t_map **map)
 {
 	size_t		map_full_size;
-	t_map		*tmp_map;
+	t_map		*todel;
 
-	tmp_map = (*map);
-	ft_putstr("\nf(munmap_and_update_maps)\naddr: ");
-	ft_putnbr_base((long)(*map), 16);	
-	map_full_size = (*map)->block->size + BLOCK_SIZE + MAP_SIZE;
-	if (prev_map)
-		(*prev_map)->next = (*map)->next;
-	// else
-	// 	map = map->next;
+	todel = *map;
+	map_full_size = todel->block->size + MAP_SIZE;
+	ft_putstr("\nf(munmap_and_update_maps), addr: ");
+	ft_putnbr_base((long)(*map)->next, 16);	
 
-	(*map) = NULL;
-	munmap(tmp_map, map_full_size);
+	if ((*map)->prev)
+		*map = (*map)->prev;
+	(*map)->next = todel->next;
+	if ((*map)->next)
+		(*map)->next->prev = *map;
+
+	ft_putstr("\nmapfullsize: ");
+	ft_putnbr_base((long)map_full_size, 10);	
+
+	munmap(todel, map_full_size);
+	ft_putstr("\nEND OF f(munmap_and_update_maps), addr TO DEWL: ");	
+	ft_putnbr_base((long)todel, 16);
+	todel = NULL;
+	ft_putstr("\nEND OF f(munmap_and_update_maps), addr GLOBAL: ");	
+	ft_putnbr_base((long)g_types_tab[LARGE], 16);
+	
 }
 
-static void		browse_map(t_map **map, t_block *to_free, t_map **prev_map)
+static void		browse_found_map(t_map **map, t_block *to_free)
 {
 	t_block		*block;
 
 	to_free->free = TRUE;
 
 	ft_putstr("\nf(browse_map), ptr to free: ");
-	ft_putnbr_base((long)to_free, 16);
+	ft_putnbr_base((long)(*map), 16);
 
-	block = (*map)->block;
+	block = (*map)->block; // NO MAPS BLOCK
 	while (block)
 	{
 		update_map_blocks(block);
@@ -65,11 +75,10 @@ static void		browse_map(t_map **map, t_block *to_free, t_map **prev_map)
 		ft_putstr("\nblock: ");
 		ft_putnbr_base((long)block, 16);
 		ft_putstr(" <> map->block: ");
-		ft_putnbr_base((long)(*map->block, 16);
+		ft_putnbr_base((long)(*map)->block, 16);
 		if (block->free && !block->next && block == (*map)->block) // NE RENTRE PAS DANS LA CDT
 		{
-			mumnmap_and_update_maps(*map, *prev_map);
-			ft_putstr("\nBM: map freed");
+			mumnmap_and_update_maps(map);
 			return;
 		}
 		block = block->next;
@@ -77,26 +86,33 @@ static void		browse_map(t_map **map, t_block *to_free, t_map **prev_map)
 	ft_putstr("\nBM ::: END\n");
 }
 
+void	find_map(t_map **map, void *ptr)
+{
+	if ((long)*map == ((long)ptr & 0xFFFFFFFFF000)) // remove FFF on macOS
+	{
+		ft_putstr("\naddr MAP: ");	
+		ft_putnbr_base((long)*map, 16);
+		ft_putstr("\naddr GLOBAL2: ");	
+		ft_putnbr_base((long)g_types_tab[LARGE], 16);
+		browse_found_map(map, (void*)ptr - BLOCK_SIZE);
+		return;
+	}
+	else if ((*map)->next)
+		find_map(&(*map)->next, ptr);
+}
+
 void    free(void *ptr)
 {
-	t_map		*map;
-	t_map		*prev_map;
-	int			types;
+	int		type;
 
 	ft_putstr("\nf(free)");
-	types = 0;
-	prev_map = NULL;
-	while ((map = g_types_tab[types++]))
+	type = 0;
+	while (type < MAX_TYPE)
 	{
-		if ((long)map == ((long)ptr & 0xFFFFFF000))
-		{
-			ft_putstr("\nmap found: ");
-			ft_putnbr_base((long)map, 16);	
-
-			browse_map(&map, (void*)ptr - BLOCK_SIZE, &prev_map);
-			return;
-		}
-		prev_map = map;
-		map = map->next;
+		ft_putstr("\naddr GLOBAL ENTRY FIND: ");
+		ft_putnbr_base((long)g_types_tab[type], 16);
+		if (g_types_tab[type])
+			find_map(&g_types_tab[type], ptr);
+		type++;
 	}
 }

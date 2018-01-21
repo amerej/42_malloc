@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:39:37 by aditsch           #+#    #+#             */
-/*   Updated: 2018/01/07 02:48:31 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/21 20:54:41 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct				s_block
 {
 		t_bool				free;
 		size_t				size;
+		size_t				size2;		
 		void				*ptr;
 		struct s_block		*prev;
 		struct s_block		*next;
@@ -43,8 +44,9 @@ typedef struct				s_block
 typedef struct				s_map
 {
 	size_t					free_space;
-	size_t					page_count;
+	size_t					page_count;	
 	struct s_block			*block;
+	struct s_map			*prev;
 	struct s_map			*next;
 }							t_map;
 
@@ -69,7 +71,7 @@ void						*malloc(size_t size);
 
 t_map		 				*get_map_lst(int type, size_t size);
 
-t_map						*create_map(int type, size_t size);
+t_map						*create_map(int type, size_t size, t_map *prevmap);
 
 t_block						*create_block(t_map *map, size_t size,
 							t_block *prev_block, t_block *next_block);

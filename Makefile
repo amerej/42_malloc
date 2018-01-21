@@ -6,7 +6,7 @@
 #    By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/02 15:03:29 by aditsch           #+#    #+#              #
-#    Updated: 2018/01/07 01:50:55 by gpoblon          ###   ########.fr        #
+#    Updated: 2018/01/20 10:30:23 by gpoblon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ NAME_LINK = libft_malloc_$(HOSTTYPE).so
 
 SRCS =	srcs/malloc.c \
 		srcs/free.c \
+		srcs/realloc.c \
 		srcs/maps.c \
 		srcs/blocks.c \
 		srcs/utils.c \

@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/07 13:23:00 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/21 16:14:34 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ void	*malloc(size_t size)
 	ft_putstr("\nmalloc return -- &block->ptr: ");
 	ft_putnbr_base((long)block->ptr, 16);
 	ft_putstr("\n");
-	
+
 	return (block->ptr);
 }

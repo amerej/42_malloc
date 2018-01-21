@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   show_alloc_mem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/07 03:06:16 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/21 17:55:50 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		print_blocks(t_block *block)
 {
-	ft_putstr("H: 0x");			
+	ft_putstr("\t\tH: 0x");			
 	ft_putnbr_base((long)block, 16);
 	ft_putstr(" => B: 0x");
 	ft_putnbr_base((long)block->ptr, 16);
@@ -28,14 +28,19 @@ static void		print_blocks(t_block *block)
 		print_blocks(block->next);
 }
 
-static void		print_maps(t_map *map)
+static void		print_maps(t_map *map, size_t count)
 {
+	ft_putstr("\tmap");
+	ft_putnbr_base((long)count, 10);
+	ft_putstr(" - addr: ");
+	ft_putnbr_base((long)map, 16);	
+	ft_putstr("\n");
 	if (map->block)
 		print_blocks(map->block);
 	else
-		ft_putstr("THERE MUST BE AN ERROR: NO EXISTING BLOCKS IN MAP\n");	
-	if (map->next)
-		print_maps(map->next);
+		ft_putstr("THERE MUST BE AN ERROR: NO EXISTING BLOCKS IN MAP\n");
+	if (map->next)		
+		print_maps(map->next, ++count);
 }
 
 static t_bool	print_header(t_map *head, char *str_type)
@@ -57,7 +62,7 @@ static void	print_alloc_mem_type(int type, char *str_type)
 {
 	if (!print_header(g_types_tab[type], str_type))
 		return;
-	print_maps(g_types_tab[type]);
+	print_maps(g_types_tab[type], 0);
 }
 
 void		show_alloc_mem(void)

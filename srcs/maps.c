@@ -6,32 +6,25 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/07 03:06:16 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/21 20:58:55 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
 
-static void     init_map(t_map **map, size_t mapsize)
+static void     init_map(t_map **map, size_t mapsize, t_map *prevmap)
 {
-	ft_putstr("\nf(init_map)");	
-	// ft_putstr("\nmap starting addr = ");
-	// ft_putnbr_base((long)*map, 16);
-	// ft_putstr(", mapsize = ");
-	// ft_putnbr(mapsize, 10);
-	// ft_putstr(", BLOCK_SIZE = ");
-	// ft_putnbr(BLOCK_SIZE, 10);
-	// ft_putstr(", MAP_SIZE = ");
-	// ft_putnbr(MAP_SIZE, 10);	
+	ft_putstr("\nf(init_map)");
 
-	(*map)->free_space = mapsize - MAP_SIZE;
-	(*map)->page_count = mapsize / getpagesize();
+	(*map)->free_space = mapsize - MAP_SIZE - BLOCK_SIZE; // BLOCK_SIZE added to prevent segf
+	(*map)->page_count = mapsize / getpagesize();	
 	(*map)->block =
 		create_block(*map, mapsize - MAP_SIZE - BLOCK_SIZE, NULL, NULL);
 	(*map)->next = NULL;
+	(*map)->prev = prevmap;
 }
 
-t_map			*create_map(int type, size_t size)
+t_map			*create_map(int type, size_t size, t_map *prevmap)
 {
 	t_map	*map;
 	size_t	psize;
@@ -55,6 +48,9 @@ t_map			*create_map(int type, size_t size)
 		((size + BLOCK_SIZE + MAP_SIZE - 1) / psize + 1) * psize :
 		(((size + BLOCK_SIZE) * 100 + MAP_SIZE - 1) / psize + 1) * psize;
 
+	ft_putstr("\nmap size:"); ft_putnbr_base((long)mapsize, 10);
+	ft_putstr(" and getpagesize():"); ft_putnbr_base((long)psize, 10);
+	
 	if ((map = mmap(NULL, mapsize, PROT_READ | PROT_WRITE,
 		MAP_ANONYMOUS | MAP_PRIVATE, -1, 0)) == MAP_FAILED)
 		return (NULL);
@@ -63,7 +59,7 @@ t_map			*create_map(int type, size_t size)
 	if (g_types_tab[type] == NULL)
 		g_types_tab[type] = map;
 
-	init_map(&map, mapsize);
+	init_map(&map, mapsize, prevmap);
 	return map;
 }
 
@@ -77,6 +73,6 @@ t_map		    *get_map_lst(int type, size_t size)
 	ft_putstr("\nf(get_map_lst)");
 	
 	return ((g_types_tab[type]) ?
-			g_types_tab[type] :
-			create_map(type, size));
+		g_types_tab[type] :
+		create_map(type, size, NULL));
 }

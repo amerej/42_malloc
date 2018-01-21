@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/07 03:50:31 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/21 20:48:53 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_block	*get_fiteable_block(t_map *map, int type, size_t size)
 	block = map->block;
 	while (block)
 	{
-		if (block-> free && (type == TINY || type == SMALL ||
+		if (block->free && (type == TINY || type == SMALL ||
 			(type == LARGE && block->size >= (size + BLOCK_SIZE))))
 			return (block);
 		block = block->next;
@@ -31,21 +31,12 @@ static t_block	*get_fiteable_block(t_map *map, int type, size_t size)
 static void		update_map_blocks(t_map *map, t_block *block, size_t size)
 {
 	ft_putstr("\nf(update map blocks)");
-	// ft_putnbr_base("\nblock = ", 16);
-	// ft_putnbr_base((long)block, 16);
-	// ft_putstr(", prev = ");
-	// ft_putnbr_base((long)block->prev, 16);
-	// ft_putstr(", next = ");
-	// ft_putnbr_base((long)block->next, 16);
-	// ft_putstr(", size = ");
-	// ft_putnbr((long)block->size, 10);
 
 	map->free_space = map->free_space - (size + BLOCK_SIZE);	
-	
+
 	block->free = FALSE;
 	block->size = size;
 	block->next = create_block(map, map->free_space, block, block->next);
-	
 }
 
 t_block     	*create_block(t_map *map, size_t size, t_block *prev_block,
@@ -57,17 +48,6 @@ t_block     	*create_block(t_map *map, size_t size, t_block *prev_block,
 
 	if (!prev_block) block = (void *)map + MAP_SIZE;
 	else block = (void *)prev_block + BLOCK_SIZE + prev_block->size;
-
-	// ft_putstr("\nblock = ");
-	// ft_putnbr_base((long)block, 16);
-	// ft_putstr(", bprev = ");
-	// ft_putnbr_base((long)prev_block, 16);	
-	// ft_putstr(", bnext = ");
-	// ft_putnbr_base((long)next_block, 16);
-	// ft_putstr(", size = ");	
-	// ft_putnbr(size, 10);
-	// ft_putstr(", map->free_space = ");	
-	// ft_putnbr(map->free_space, 10);
 	
 	block->free = TRUE;
 	block->size = size;
@@ -104,6 +84,6 @@ t_block		    *get_block(t_map *map, int type, size_t size)
 	
 	ft_putstr("\nend of map loop, no result -> create_map");
 	
-	cur_map->next = create_map(type, size);
+	cur_map->next = create_map(type, size, cur_map);
 	return (get_block(cur_map->next, type, size));
 }

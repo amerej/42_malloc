@@ -1,4 +1,3 @@
-void		*realloc(void *ptr, size_t size)
-{
-	return;
-}
+// void		*realloc(void *ptr, size_t size)
+// {
+// }
