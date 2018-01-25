@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 18:49:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/06 18:58:02 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/25 17:17:17 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			get_type(size_t size)
 		return (LARGE);
 }
 
-int			get_size(size_t size)
+size_t		get_size(size_t size)
 {
 	if (size <= TINY_SIZE)
 		return (TINY_SIZE);

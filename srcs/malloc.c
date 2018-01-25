@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/21 16:14:34 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/25 18:02:45 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	*malloc(size_t size)
 	type = get_type(size);
 	size = get_size(size);
 	
-	map_lst = get_map_lst(type, size); // get the right map type to work on
-	if (!map_lst)
+	if (!(map_lst = get_map_lst(type, size))) // get the right map type to work on
 		return (NULL);
 
-	block = get_block(map_lst, type, size);
+	if (!(block = get_block(map_lst, type, size)))
+		return (NULL);
 
 	ft_putstr("\nmalloc return -- &block->ptr: ");
 	ft_putnbr_base((long)block->ptr, 16);

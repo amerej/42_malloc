@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/21 20:56:48 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/25 19:35:37 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,6 @@ static void		mumnmap_and_update_maps(t_map **map)
 	map_full_size = todel->block->size + MAP_SIZE;
 
 
-	ft_putstr("\naddr GLOBAL IN: ");
-	ft_putnbr_base((long)g_types_tab[LARGE], 16);
-
 	ft_putstr("\nf(munmap_and_update_maps), map IN addr: ");
 	ft_putnbr_base((long)*map, 16);
 
@@ -52,21 +49,16 @@ static void		mumnmap_and_update_maps(t_map **map)
 	ft_putstr("\nf(munmap_and_update_maps), map OUT addr: ");
 	ft_putnbr_base((long)*map, 16);	
 
-	ft_putstr("\naddr GLOBAL OUT: ");
-	ft_putnbr_base((long)g_types_tab[LARGE], 16);
-
 	munmap(todel, map_full_size);
 	todel = NULL;
-	
 }
 
 static void		browse_found_map(t_map **map, t_block *to_free)
 {
 	t_block		*block;
 
-	to_free->free = TRUE;
-
 	ft_putstr("\nf(browse_map)");
+	to_free->free = TRUE;
 
 	block = (*map)->block; // NO MAPS BLOCK
 	while (block)
@@ -83,31 +75,40 @@ static void		browse_found_map(t_map **map, t_block *to_free)
 	ft_putstr("\nBM ::: END\n");
 }
 
-void	find_map(t_map **map, void *ptr)
+static int		find_map(t_map **map, void *ptr, size_t page)
 {
-	ft_putstr("\nf(find_map)");	
-	if ((long)*map == ((long)ptr & 0xFFFFFFFFF000)) // remove FFF on macOS
+	ft_putstr("\nf(find_map), addr: ");	ft_putnbr_base((long)*map, 16);
+	ft_putstr(", page_count: "); ft_putnbr_base((long)(*map)->page_count, 10);
+	ft_putstr(", page: "); ft_putnbr_base((long)page, 10);
+
+
+	if ((long)((void*)*map + getpagesize() * page) == ((long)ptr & 0xFFFFFFFFF000)) // remove FFF on macOS
 	{
-		browse_found_map(map, (void*)ptr - BLOCK_SIZE);
-		return;
+		ft_putstr("\nMap found");
+		browse_found_map(map, ptr - BLOCK_SIZE);
+		return TRUE;
 	}
+	else if ((*map)->page_count > page)
+		find_map(map, ptr, page + 1);
 	else if ((*map)->next)
-		find_map(&(*map)->next, ptr);
+		find_map(&(*map)->next, ptr, 0);
+	return FALSE;
 }
 
-void    free(void *ptr)
+void			free(void *ptr)
 {
 	int		type;
 
 	ft_putstr("\nf(free)");
-	ft_putnbr_base((long)BLOCK_SIZE, 10);
-	
 
 	type = 0;
+
 	while (type < MAX_TYPE)
 	{
-		if (g_types_tab[type])
-			find_map(&g_types_tab[type], ptr);
+		if (g_types_tab[type]) {
+			if (find_map(&g_types_tab[type], ptr, 0))
+				return;
+		}
 		type++;
 	}
 }

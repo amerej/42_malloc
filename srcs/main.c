@@ -35,41 +35,39 @@ int main (int argc, char** argv)
 	// 	++i;
 	// }
 
-	// char *str1 = (char*)malloc(1);
-	// char *str2 = (char*)malloc(2);
-	// char *str3 = (char*)malloc(3);
-	// char *str4 = (char*)malloc(4);
-	// char *str5 = (char*)malloc(5);
-	// char *str6 = (char*)malloc(6);
+	char *str15 = (char*)malloc(4023423421215);	
+	char *str1 = (char*)malloc(1);
+	char *str4 = (char*)malloc(4);
 	char *str10 = (char*)malloc(4097);
-	char *str11 = (char*)malloc(3913);			
-	// char *str12 = (char*)malloc(4099);
-	// char *str13 = (char*)malloc(40911232);	
-	// char *str14 = (char*)malloc(40129214);	
-	// char *str15 = (char*)malloc(40291215);	
+	char *str11 = (char*)malloc(3670009673123186723);			
+	char *str6 = (char*)malloc(16);
+	char *str12 = (char*)malloc(45452354094);
+	char *str3 = (char*)malloc(323);
+	char *str13 = (char*)malloc(409234253453212);	
+	char *str2 = (char*)malloc(22);
+	char *str14 = (char*)malloc(40914);	
+	char *str5 = (char*)malloc(53);
 	
 	ft_putstr("\nDONE MALLOCING\n");
 
 	show_alloc_mem();
 	
-	free(str10); //show_alloc_mem();
+	free(str15);
+	free(str4);	//show_alloc_mem();
 	free(str11); //show_alloc_mem();
-	// free(str6); //show_alloc_mem();
-	// free(str4);	//show_alloc_mem();
-	// free(str2); //show_alloc_mem();
-	// free(str3); //show_alloc_mem();
-	// free(str1); //show_alloc_mem();
-	// free(str5); //show_alloc_mem();
-	// free(str12); //show_alloc_mem();
-	// free(str13); //show_alloc_mem();
-	// free(str14); //show_alloc_mem();
-	// free(str15);
+	free(str2); //show_alloc_mem();
+	free(str3); //show_alloc_mem();
+	free(str1); //show_alloc_mem();
+	free(str14); //show_alloc_mem();
+	free(str10); //show_alloc_mem();
+	free(str12); //show_alloc_mem();
+	free(str6); //show_alloc_mem();
+	free(str13); //show_alloc_mem();
+	free(str5); //show_alloc_mem();
+	ft_putstr("\nDONE FREEING\n");
 	show_alloc_mem();
-
-	ft_putstr("\nFREE ALL DONE\n");
 }
 
 
-BUGS LIST ::
-APPLY PAGES_COUNT to free LARGE on several pages
-CHECK THE UNMAP MAP MANIPULATIONS
+// BUGS LIST ::
+// CHECK THE UNMAP MAP MANIPULATIONS

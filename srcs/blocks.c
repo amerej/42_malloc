@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/21 20:48:53 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/25 17:58:41 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_block		    *get_block(t_map *map, int type, size_t size)
 
 	ft_putstr("\nf(get block)");
 
-	block = NULL;
+	block = NULL;	
 
 	while (map) // si on ajoute get_map en wrapper on peut faire get_map en recursive, + propre
 	{
@@ -84,6 +84,8 @@ t_block		    *get_block(t_map *map, int type, size_t size)
 	
 	ft_putstr("\nend of map loop, no result -> create_map");
 	
-	cur_map->next = create_map(type, size, cur_map);
+	if (!(cur_map->next = create_map(type, size, cur_map)))
+		return NULL;
+	
 	return (get_block(cur_map->next, type, size));
 }

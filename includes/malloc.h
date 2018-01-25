@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:39:37 by aditsch           #+#    #+#             */
-/*   Updated: 2018/01/21 20:54:41 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/25 17:17:29 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_block						*get_block(t_map *map, int type, size_t size);
 
 
 int							get_type(size_t size);
-int							get_size(size_t size);
+size_t						get_size(size_t size);
 
 void						ft_putstr(char *str);
 void						ft_putnbr_base(long n, int base);

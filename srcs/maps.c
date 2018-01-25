@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/21 20:58:55 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/25 18:02:21 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,11 @@ t_map			*create_map(int type, size_t size, t_map *prevmap)
 		((size + BLOCK_SIZE + MAP_SIZE - 1) / psize + 1) * psize :
 		(((size + BLOCK_SIZE) * 100 + MAP_SIZE - 1) / psize + 1) * psize;
 
-	ft_putstr("\nmap size:"); ft_putnbr_base((long)mapsize, 10);
-	ft_putstr(" and getpagesize():"); ft_putnbr_base((long)psize, 10);
-	
 	if ((map = mmap(NULL, mapsize, PROT_READ | PROT_WRITE,
-		MAP_ANONYMOUS | MAP_PRIVATE, -1, 0)) == MAP_FAILED)
-		return (NULL);
+		MAP_ANONYMOUS | MAP_PRIVATE, -1, 0)) == MAP_FAILED) {
+			ft_putstr("\nMAP FAILED\n");
+			return (NULL);
+		}
 
 	// init g_type list if not exist else list is updated in get_block
 	if (g_types_tab[type] == NULL)
