@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/25 18:02:21 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/26 21:57:30 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_map			*create_map(int type, size_t size, t_map *prevmap)
 	
 	psize = (size_t)getpagesize();
 
-	mapsize = (size > psize) ?
+	mapsize = (size > SMALL_SIZE) ?
 		((size + BLOCK_SIZE + MAP_SIZE - 1) / psize + 1) * psize :
 		(((size + BLOCK_SIZE) * 100 + MAP_SIZE - 1) / psize + 1) * psize;
 

@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/25 17:58:41 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/26 22:10:16 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static t_block	*get_fiteable_block(t_map *map, int type, size_t size)
 	block = map->block;
 	while (block)
 	{
-		if (block->free && (type == TINY || type == SMALL ||
-			(type == LARGE && block->size >= (size + BLOCK_SIZE))))
+		if (block->free)
 			return (block);
 		block = block->next;
 	}
@@ -46,8 +45,10 @@ t_block     	*create_block(t_map *map, size_t size, t_block *prev_block,
 
 	ft_putstr("\nf(create block)");
 
-	if (!prev_block) block = (void *)map + MAP_SIZE;
-	else block = (void *)prev_block + BLOCK_SIZE + prev_block->size;
+	if (!prev_block)
+		block = (void *)map + MAP_SIZE;
+	else
+		block = (void *)prev_block + BLOCK_SIZE + prev_block->size;
 	
 	block->free = TRUE;
 	block->size = size;
@@ -72,8 +73,10 @@ t_block		    *get_block(t_map *map, int type, size_t size)
 
 	while (map) // si on ajoute get_map en wrapper on peut faire get_map en recursive, + propre
 	{
-		if (map->free_space >= (size + BLOCK_SIZE) &&
-			(block = get_fiteable_block(map, type, size)))
+
+		if ((type != LARGE && map->free_space >= size + BLOCK_SIZE
+			&& (block = get_fiteable_block(map, type, size))) || (type == LARGE
+			&& map->block == (block = get_fiteable_block(map, type, size))))
 		{
 			update_map_blocks(map, block, size);
 			return block;
