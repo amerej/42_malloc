@@ -42,27 +42,17 @@ size_t	get_alloc_pages_count()
 
 t_map	*g_types_tab[MAX_TYPE] = {NULL, NULL, NULL};
 
-
-
 void	*malloc(size_t size)
 {
-	t_map 	*map_lst;
-	t_block	*block;
-	int		type;
+	t_map 			*map_lst;
+	t_block			*block;
+	int				type;
 	struct rlimit	rt;
-	size_t	alloc_pages_count;
+
 	ft_putstr("\nf(MAIN)");
-
-
-	getrlimit(RLIMIT_AS, &rt);
-	alloc_pages_count = get_alloc_pages_count();
-	ft_putnbr_base((long)(rt.rlim_max / getpagesize()), 10);
 
 	if (!size || getrlimit(RLIMIT_AS, &rt) || rt.rlim_max < size)
 		return (NULL);
-
-	if (size <= 0)
-		return (NULL); // check expected return	
 
 	type = get_type(size);
 	size = get_size(size);

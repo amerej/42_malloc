@@ -75,29 +75,33 @@ static void		browse_found_map(t_map **map, t_block *to_free)
 	ft_putstr("\nBM ::: END\n");
 }
 
-static int		find_map(t_map **map, void *ptr, size_t page)
+static int		find_map(t_map **map, void *ptr)
 {
 	void	*page_addr;
+	size_t	page;
 
+	page = 0;
 	ft_putstr("\nf(find_map), addr: ");	ft_putnbr_base((long)*map, 16);
 	ft_putstr(", page_count: "); ft_putnbr_base((long)(*map)->page_count, 10);
 
-	while ((*map)->page_count > page)
+	while (*map)
 	{
-		page_addr = (void*)map + (getpagesize() * page);
-		ft_putstr("\nf(find_map), addr: ");	ft_putnbr_base((long)*map, 16);		
-		ft_putstr("\npage_addr: "); ft_putnbr_base((long)page_addr, 16);
-		ft_putstr(", page: "); ft_putnbr_base((long)page, 10);
-		if ((long)page_addr == ((long)ptr & 0xFFFFFFFFF000)) // remove FFF on macOS
+		while ((*map)->page_count > page)
 		{
-			ft_putstr("\nMap found");
-			browse_found_map(map, ptr - BLOCK_SIZE);
-			return TRUE;
+			page_addr = (void*)map + (getpagesize() * page);
+			// ft_putstr("\nf(find_map), addr: ");	ft_putnbr_base((long)*map, 16);		
+			// ft_putstr("\npage_addr: "); ft_putnbr_base((long)page_addr, 16);
+			// ft_putstr(", page: "); ft_putnbr_base((long)page, 10);
+			if ((long)page_addr == ((long)ptr & 0xFFFFFFFFF000)) // remove FFF on macOS
+			{
+				ft_putstr("\nMap found");
+				browse_found_map(map, ptr - BLOCK_SIZE);
+				return TRUE;
+			}
+			++page;
 		}
-		++page;
+		*map = (*map)->next;
 	}
-	if ((*map)->next)
-		find_map(&(*map)->next, ptr, 0);
 	return FALSE;
 }
 
@@ -106,13 +110,11 @@ void			free(void *ptr)
 	int		type;
 
 	ft_putstr("\nf(free)");
-
 	type = 0;
-
 	while (type < MAX_TYPE)
 	{
 		if (g_types_tab[type]) {
-			if (find_map(&g_types_tab[type], ptr, 0))
+			if (find_map(&g_types_tab[type], ptr))
 				return;
 		}
 		type++;
