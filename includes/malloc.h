@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:39:37 by aditsch           #+#    #+#             */
-/*   Updated: 2018/01/25 17:17:29 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/26 15:18:27 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <sys/mman.h>
 # include <stdlib.h>
+# include <sys/resource.h>
 
 enum	e_type
 {
@@ -34,7 +35,6 @@ typedef struct				s_block
 {
 		t_bool				free;
 		size_t				size;
-		size_t				size2;		
 		void				*ptr;
 		struct s_block		*prev;
 		struct s_block		*next;
@@ -68,6 +68,8 @@ extern t_map				*g_types_tab[MAX_TYPE];
 
 
 void						*malloc(size_t size);
+void						*realloc(void *ptr, size_t size);
+void						free(void *ptr);
 
 t_map		 				*get_map_lst(int type, size_t size);
 
@@ -84,6 +86,8 @@ size_t						get_size(size_t size);
 
 void						ft_putstr(char *str);
 void						ft_putnbr_base(long n, int base);
+
+void						wander_types(void *ptr);
 
 void						show_alloc_mem(void);
 

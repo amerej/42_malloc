@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/25 18:02:45 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/26 16:49:20 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,48 @@
 ** each types_tab elem contains a list of mmap results (t_block)
 */
 
+size_t	get_alloc_pages_count()
+{
+	int		type;
+	t_map	*map;
+	size_t	count;
+
+	type = 0;
+	count = 0;
+	while (type < MAX_TYPE)
+	{
+		if ((map = g_types_tab[type])) {
+			while (map)
+			{
+				count += map->page_count;
+				map = map->next;
+			}
+		}
+		type++;
+	}
+	return (count);
+}
+
 t_map	*g_types_tab[MAX_TYPE] = {NULL, NULL, NULL};
+
+
 
 void	*malloc(size_t size)
 {
 	t_map 	*map_lst;
 	t_block	*block;
 	int		type;
-
+	struct rlimit	rt;
+	size_t	alloc_pages_count;
 	ft_putstr("\nf(MAIN)");
+
+
+	getrlimit(RLIMIT_AS, &rt);
+	alloc_pages_count = get_alloc_pages_count();
+	ft_putnbr_base((long)(rt.rlim_max / getpagesize()), 10);
+
+	if (!size || getrlimit(RLIMIT_AS, &rt) || rt.rlim_max < size)
+		return (NULL);
 
 	if (size <= 0)
 		return (NULL); // check expected return	
