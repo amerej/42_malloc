@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/26 17:27:10 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/01/27 12:49:15 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,46 +75,33 @@ static void		browse_found_map(t_map **map, t_block *to_free)
 	ft_putstr("\nBM ::: END\n");
 }
 
-static int		find_map(t_map **map, void *ptr)
+static int		find_map(t_map **map, void *ptr, int type, size_t page)
 {
 	void	*page_addr;
-	size_t	page;
 
-	page = 0;
-	ft_putstr("\nf(find_map), addr: ");	ft_putnbr_base((long)*map, 16);
-	ft_putstr(", page_count: "); ft_putnbr_base((long)(*map)->page_count, 10);
-
-	while (*map)
-	{
-		while ((*map)->page_count > page)
-		{
-			page_addr = (void*)map + (getpagesize() * page);
-			// ft_putstr("\nf(find_map), addr: ");	ft_putnbr_base((long)*map, 16);		
-			// ft_putstr("\npage_addr: "); ft_putnbr_base((long)page_addr, 16);
-			// ft_putstr(", page: "); ft_putnbr_base((long)page, 10);
-			if ((long)page_addr == ((long)ptr & 0xFFFFFFFFF000)) // remove FFF on macOS
-			{
-				ft_putstr("\nMap found");
-				browse_found_map(map, ptr - BLOCK_SIZE);
-				return TRUE;
-			}
-			++page;
-		}
-		*map = (*map)->next;
+  	if ((long)((void*)*map + getpagesize() * page) == ((long)ptr & 0xFFFFFFFFF000)) // remove FFF on macOS
+  	{
+		ft_putstr("\nMap found");
+	 	browse_found_map(map, ptr - BLOCK_SIZE);
+		return TRUE;
 	}
+	else if (type != LARGE && (*map)->page_count > page)
+		find_map(map, ptr, type, page + 1);
+	else if ((*map)->next)
+		find_map(&(*map)->next, ptr, type, 0);
 	return FALSE;
 }
 
 void			free(void *ptr)
 {
 	int		type;
-
 	ft_putstr("\nf(free)");
+
 	type = 0;
 	while (type < MAX_TYPE)
 	{
 		if (g_types_tab[type]) {
-			if (find_map(&g_types_tab[type], ptr))
+			if (find_map(&g_types_tab[type], ptr, type, 0))
 				return;
 		}
 		type++;

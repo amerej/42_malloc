@@ -51,29 +51,32 @@ int main (int argc, char** argv)
 	char *str13 = (char*)malloc(40923423212);	
 	char *str17 = (char*)malloc(3000);		
 	char *str18 = (char*)malloc(3100);		
-	char *str19 = (char*)malloc(3200);		
+	char *str19 = (char*)malloc(3200);
+
+	char *str20 = (char*)realloc(str7, 711);				
 	
 	ft_putstr("\nDONE MALLOCING\n");
 
 	show_alloc_mem();
 	
-	// free(str15);
-	// free(str19);	
-	// free(str14); //show_alloc_mem();
-	// free(str16);
-	// free(str11); //show_alloc_mem();
-	// free(str13); //show_alloc_mem();
-	// free(str12); //show_alloc_mem();
-	// free(str10); //show_alloc_mem();
-	// free(str1); //show_alloc_mem();
-	// free(str2); //show_alloc_mem();
-	// free(str3); //show_alloc_mem();
-	// free(str4);	//show_alloc_mem();
-	// free(str5); //show_alloc_mem();
-	// free(str6); //show_alloc_mem();
-	// free(str17); //show_alloc_mem();
-	// free(str18); //show_alloc_mem();
-	// free(str19);
+	free(str15);
+	free(str19);	
+	free(str14); //show_alloc_mem();
+	free(str16);
+	free(str11); //show_alloc_mem();
+	free(str13); //show_alloc_mem();
+	free(str12); //show_alloc_mem();
+	free(str10); //show_alloc_mem();
+	free(str6); //show_alloc_mem();
+	free(str2); //show_alloc_mem();
+	free(str4);	//show_alloc_mem();
+	free(str7);	//show_alloc_mem();
+	free(str3); //show_alloc_mem();
+	free(str5); //show_alloc_mem();
+	free(str1); //show_alloc_mem();
+	free(str17); //show_alloc_mem();
+	free(str18); //show_alloc_mem();
+	free(str19);
 	ft_putstr("\nDONE FREEING\n");
 	show_alloc_mem();
 }
