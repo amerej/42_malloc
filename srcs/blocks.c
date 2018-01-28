@@ -12,7 +12,7 @@
 
 #include "../includes/malloc.h"
 
-static t_block	*get_fiteable_block(t_map *map, int type, size_t size)
+static t_block	*get_fiteable_block(t_map *map)
 {
 	t_block	*block;
 
@@ -75,8 +75,8 @@ t_block		    *get_block(t_map *map, int type, size_t size)
 	{
 
 		if ((type != LARGE && map->free_space >= size + BLOCK_SIZE
-			&& (block = get_fiteable_block(map, type, size))) || (type == LARGE
-			&& map->block == (block = get_fiteable_block(map, type, size))))
+			&& (block = get_fiteable_block(map))) || (type == LARGE
+			&& map->block == (block = get_fiteable_block(map))))
 		{
 			update_map_blocks(map, block, size);
 			return block;

@@ -77,8 +77,6 @@ static void		browse_found_map(t_map **map, t_block *to_free)
 
 static int		find_map(t_map **map, void *ptr, int type, size_t page)
 {
-	void	*page_addr;
-
   	if ((long)((void*)*map + getpagesize() * page) == ((long)ptr & 0xFFFFFFFFF000)) // remove FFF on macOS
   	{
 		ft_putstr("\nMap found");
