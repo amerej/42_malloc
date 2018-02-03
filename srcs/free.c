@@ -93,7 +93,9 @@ static int		find_map(t_map **map, void *ptr, int type, size_t page)
 void			free(void *ptr)
 {
 	int		type;
-	ft_putstr("\nf(free)");
+	ft_putstr("\nf(free), addr"); ft_putnbr_base((long)ptr, 16);
+
+	show_alloc_mem();
 
 	type = 0;
 	while (type < MAX_TYPE)

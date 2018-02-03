@@ -49,7 +49,9 @@ void	*malloc(size_t size)
 	int				type;
 	struct rlimit	rt;
 
-	ft_putstr("\nf(MAIN)");
+	ft_putstr("\nf(MALLOC), ptr"); ft_putnbr_base((long)size, 10); 
+
+	show_alloc_mem();
 
 	if (!size || getrlimit(RLIMIT_AS, &rt) || rt.rlim_max < size)
 		return (NULL);

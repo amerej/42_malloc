@@ -41,7 +41,7 @@ int main (int argc, char** argv)
 	// char *str4 = (char*)malloc(4);
 	// char *str5 = (char*)malloc(53);
 	// char *str6 = (char*)malloc(16);
-	char *str7 = (char*)malloc(1160);
+	char *str7 = (char*)malloc(4096);
 	// char *str10 = (char*)malloc(97);
 	// char *str15 = (char*)malloc(4023423421);	
 	// char *str14 = (char*)malloc(40914);	

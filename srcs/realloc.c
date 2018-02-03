@@ -37,9 +37,10 @@ static t_block		*update_malloc(t_map **map, t_block *block, size_t size, int typ
     }
     else // if (block->size < size)
     {
-		ft_putstr("\nf(if block->size < size). free& malloc");
+		ft_putstr("\nf(if block->size < size). free& malloc, size");
+		ft_putstr(" type "); ft_putnbr_base((long)type, 10);
         free(block->ptr);
-        return (malloc(size));
+		return (malloc(size));
     }
 }
 
@@ -60,26 +61,24 @@ static t_block		*browse_found_map(t_map **map, t_block *to_realloc, size_t size,
     return NULL;
 }
 
-static t_block	*find_map(t_map **map, void *ptr, size_t size, int type)
+static t_block	*find_map(t_map **map, void *ptr, size_t size, int type, int page)
 {
 	ft_putstr("\nf(find_map)");
-	void	*lastpage;
 	
-	lastpage = *map + (getpagesize() * (*map)->page_count);
-  	if ((long)*map == ((long)ptr & 0xFFFFFFFFF000)) // remove FFF on macOS
+  	if ((long)((void*)*map + getpagesize() * page) == ((long)ptr & 0xFFFFFFFFF000)) // remove FFF on macOS
   	{
 		ft_putstr("\nMap found");
 	 	return browse_found_map(map, ptr - BLOCK_SIZE, size, type);
 	}
-	else if (type != LARGE && (void*)*map < lastpage)
+	else if (type != LARGE && (*map)->page_count > (size_t)page)
 	{
-		ft_putstr("page->count");
-		find_map(map + getpagesize(), ptr, size, type);
+		ft_putstr("\npage->count "); ft_putnbr_base((long)(*map)->page_count, 10);
+		find_map(map, ptr, size, type, page + 1);
 	}
 	else if ((*map)->next)
 	{
 		ft_putstr("map->next");
-		find_map(&(*map)->next, ptr, size, type);
+		find_map(&(*map)->next, ptr, size, type, 0);
 	}
 	return NULL;
 }
@@ -88,9 +87,13 @@ void			*realloc(void *ptr, size_t size)
 {
 	int		type;
     void    *realloced_ptr;
-	ft_putstr("\nf(realloc)");
+	ft_putstr("\nf(realloc), ptr:");ft_putnbr_base((long)ptr, 16);
+
+	show_alloc_mem();
 
 	type = 0;
+	if (ptr == NULL)
+		return (malloc(size));
 	if (size == 0)
 	{
 		free(ptr);
@@ -99,10 +102,12 @@ void			*realloc(void *ptr, size_t size)
 	while (type < MAX_TYPE)
 	{
 		if (g_types_tab[type]) {
-			if ((realloced_ptr = find_map(&g_types_tab[type], ptr, size, type)))
+			ft_putstr("\nglobal "); ft_putnbr_base((long)&g_types_tab[type], 16);
+			ft_putstr(" type "); ft_putnbr_base((long)type, 10);			
+			if ((realloced_ptr = find_map(&g_types_tab[type], ptr, size, type, 0)))
 				return realloced_ptr;
 		}
 		type++;
 	}
-    return NULL;
+    return ptr;
 }
