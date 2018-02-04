@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/26 16:49:20 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/02/04 16:39:36 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	*malloc(size_t size)
 
 	ft_putstr("\nf(MALLOC), ptr"); ft_putnbr_base((long)size, 10); 
 
-	show_alloc_mem();
-
 	if (!size || getrlimit(RLIMIT_AS, &rt) || rt.rlim_max < size)
 		return (NULL);
 
@@ -64,6 +62,8 @@ void	*malloc(size_t size)
 
 	if (!(block = get_block(map_lst, type, size)))
 		return (NULL);
+
+	// show_alloc_mem();
 
 	ft_putstr("\nmalloc return -- &block->ptr: ");
 	ft_putnbr_base((long)block->ptr, 16);

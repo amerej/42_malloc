@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/27 12:49:15 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/02/04 16:39:39 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ static void		mumnmap_and_update_maps(t_map **map)
 	todel = NULL;
 }
 
-static void		browse_found_map(t_map **map, t_block *to_free)
+static void		browse_found_map(t_map **map, t_block *to_free, int type)
 {
 	t_block		*block;
+	int count =0;
 
 	ft_putstr("\nf(browse_map)");
 	to_free->free = TRUE;
@@ -64,8 +65,11 @@ static void		browse_found_map(t_map **map, t_block *to_free)
 	while (block)
 	{
 		update_map_blocks(block);
+		ft_putstr("\nf(block if count)");
+		ft_putnbr_base((long)count++, 10);
 
-		if (block->free && !block->next && block == (*map)->block) // NE RENTRE PAS DANS LA CDT
+		if (type == LARGE ||
+			(block->free && !block->next && block == (*map)->block)) // NE RENTRE PAS DANS LA CDT
 		{
 			mumnmap_and_update_maps(map);
 			return;
@@ -79,14 +83,15 @@ static int		find_map(t_map **map, void *ptr, int type, size_t page)
 {
   	if ((long)((void*)*map + getpagesize() * page) == ((long)ptr & 0xFFFFFFFFF000)) // remove FFF on macOS
   	{
-		ft_putstr("\nMap found");
-	 	browse_found_map(map, ptr - BLOCK_SIZE);
+		ft_putstr("\nMap found: ");
+		ft_putnbr_base((long)*map, 16);		
+	 	browse_found_map(map, ptr - BLOCK_SIZE, type);
 		return TRUE;
 	}
 	else if (type != LARGE && (*map)->page_count > page)
-		find_map(map, ptr, type, page + 1);
+		return find_map(map, ptr, type, page + 1);
 	else if ((*map)->next)
-		find_map(&(*map)->next, ptr, type, 0);
+		return find_map(&(*map)->next, ptr, type, 0);
 	return FALSE;
 }
 
@@ -95,15 +100,20 @@ void			free(void *ptr)
 	int		type;
 	ft_putstr("\nf(free), addr"); ft_putnbr_base((long)ptr, 16);
 
-	show_alloc_mem();
-
 	type = 0;
+	if (ptr == NULL)
+		return; 
 	while (type < MAX_TYPE)
 	{
 		if (g_types_tab[type]) {
 			if (find_map(&g_types_tab[type], ptr, type, 0))
+			{
+				// show_alloc_mem();					
 				return;
+			}
 		}
 		type++;
 	}
+
+	// show_alloc_mem();	
 }

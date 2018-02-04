@@ -1,0 +1,1 @@
+make re && echo "\nCOMMAND RESULTS\n" && sh env_linux.sh $1 2> /dev/pts/1

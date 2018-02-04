@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/26 16:48:55 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/02/04 16:39:58 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void		print_maps(t_map *map, size_t count)
 		print_blocks(map->block);
 	else
 		ft_putstr("THERE MUST BE AN ERROR: NO EXISTING BLOCKS IN MAP\n");
-	if (map->next)		
+	if (map->next)
 		print_maps(map->next, ++count);
 }
 
@@ -70,11 +70,9 @@ void		print()
 	int		type;
 	t_map	*map;
 	t_block	*block;
-	size_t	count;
 	t_map	*eta;
 
 	type = 0;
-	count = 0;
 	while (type < MAX_TYPE)
 	{
 		ft_putstr("\ntype: ");
@@ -99,6 +97,7 @@ void		print()
 
 void		show_alloc_mem(void)
 {
+	// return;
 	// print();	
 	ft_putstr("\n");
 	print_alloc_mem_type(TINY, "TINY");

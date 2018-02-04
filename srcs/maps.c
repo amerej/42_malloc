@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/26 21:57:30 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/02/04 14:06:11 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void     init_map(t_map **map, size_t mapsize, t_map *prevmap)
 	(*map)->free_space = mapsize - MAP_SIZE - BLOCK_SIZE; // BLOCK_SIZE added to prevent segf
 	(*map)->page_count = mapsize / getpagesize();	
 	(*map)->block =
-		create_block(*map, mapsize - MAP_SIZE - BLOCK_SIZE, NULL, NULL);
+		create_block(*map, (*map)->free_space, NULL, NULL);
 	(*map)->next = NULL;
 	(*map)->prev = prevmap;
 }

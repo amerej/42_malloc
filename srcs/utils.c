@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 18:49:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/25 17:17:17 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/02/04 15:42:42 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ size_t		get_size(size_t size)
 
 void		ft_putchar(char c)
 {
-	write(1, &c, 1);
+	write(2, &c, 1);
 }
 
 void	ft_putstr(char *str)
@@ -44,7 +44,7 @@ void	ft_putstr(char *str)
 	i = 0;
 	while (str[i])
 		++i;
-	write(1, str, i);
+	write(2, str, i);
 }
 
 void	ft_putnbr_base(long nb, int base)

@@ -6,13 +6,13 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/01/26 22:10:16 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/02/04 17:21:02 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
 
-static t_block	*get_fiteable_block(t_map *map)
+static t_block	*get_fiteable_block(t_map *map, int type, size_t size)
 {
 	t_block	*block;
 
@@ -20,22 +20,29 @@ static t_block	*get_fiteable_block(t_map *map)
 	block = map->block;
 	while (block)
 	{
-		if (block->free)
+		if ((block->free && block->size >= size))
 			return (block);
 		block = block->next;
 	}
 	return (NULL);
 }
 
-static void		update_map_blocks(t_map *map, t_block *block, size_t size)
+static void		update_map_blocks(t_map *map, t_block *block, int type, size_t size)
 {
+	size_t		oldsize;
 	ft_putstr("\nf(update map blocks)");
-
-	map->free_space = map->free_space - (size + BLOCK_SIZE);	
+	oldsize = block->size;
+	map->free_space = map->free_space - (size + BLOCK_SIZE);
 
 	block->free = FALSE;
 	block->size = size;
-	block->next = create_block(map, map->free_space, block, block->next);
+	if (type == LARGE) // OK
+		block->next = create_block(map, map->free_space, block, NULL);
+	else if (!block->next)
+		block->next = create_block(map, oldsize - BLOCK_SIZE - size, block, NULL);
+	ft_putstr(" block->next oldsize "); ft_putnbr_base((long)oldsize, 10);		
+	ft_putstr(" - size "); ft_putnbr_base((long)size, 10);		
+	ft_putstr(" type "); ft_putnbr_base((long)type, 10);
 }
 
 t_block     	*create_block(t_map *map, size_t size, t_block *prev_block,
@@ -75,10 +82,10 @@ t_block		    *get_block(t_map *map, int type, size_t size)
 	{
 
 		if ((type != LARGE && map->free_space >= size + BLOCK_SIZE
-			&& (block = get_fiteable_block(map))) || (type == LARGE
-			&& map->block == (block = get_fiteable_block(map))))
+			&& (block = get_fiteable_block(map, type, size))) || (type == LARGE
+			&& map->block == (block = get_fiteable_block(map, type, size))))
 		{
-			update_map_blocks(map, block, size);
+			update_map_blocks(map, block, type, size);
 			return block;
 		}
 		cur_map = map;
