@@ -46,11 +46,8 @@ static void		*update_malloc(t_map **map, t_block *block, size_t size)
 		free(block->ptr);
 		return (new_ptr);
 	}
-    else // if (block->size >= size)
-	{
-		ft_putstr("\nelse just dont change a thing");
-		return (block->ptr);
-	}
+	ft_putstr("\nelse just dont change a thing");
+	return (block->ptr);
 }
 
 static void		*browse_found_map(t_map **map, t_block *to_realloc, size_t size)
