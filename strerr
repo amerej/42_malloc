@@ -1,0 +1,660 @@
+
+f(MALLOC), ptr32
+f(get_map_lst)
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 57264 - size 512 type 1
+malloc return -- &block->ptr: 10B77D050
+
+f(free), addr7FF733400090FFFFFFFFFFFFFFF
+f(free), addr7FF733400080FFFFFFFFFFFFFFF
+f(free), addr7FF7334000B0FFFFFFFFFFFFFFF
+f(MALLOC), ptr32
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 56712 - size 512 type 1
+malloc return -- &block->ptr: 10B77D278
+
+f(free), addr7FF733400180FFFFFFFFFFFFFFF
+f(free), addr7FF733800000FFFFFFFFFFFFFFF
+f(MALLOC), ptr32
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 56160 - size 512 type 1
+malloc return -- &block->ptr: 10B77D4A0
+
+f(free), addr7FF7334004F0FFFFFFFFFFFFFFF
+f(free), addr7FF733400120FFFFFFFFFFFFFFF
+f(free), addr7FF733400510FFFFFFFFFFFFFFF
+f(MALLOC), ptr15
+f(get_map_lst)
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 8112 - size 16 type 0
+malloc return -- &block->ptr: 10B78B050
+
+f(MALLOC), ptr45
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 55608 - size 512 type 1
+malloc return -- &block->ptr: 10B77D6C8
+
+f(MALLOC), ptr62
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 55056 - size 512 type 1
+malloc return -- &block->ptr: 10B77D8F0
+
+f(MALLOC), ptr45
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 54504 - size 512 type 1
+malloc return -- &block->ptr: 10B77DB18
+
+f(MALLOC), ptr50
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 53952 - size 512 type 1
+malloc return -- &block->ptr: 10B77DD40
+
+f(MALLOC), ptr47
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 53400 - size 512 type 1
+malloc return -- &block->ptr: 10B77DF68
+
+f(MALLOC), ptr11
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 8056 - size 16 type 0
+malloc return -- &block->ptr: 10B78B088
+
+f(MALLOC), ptr64
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 52848 - size 512 type 1
+malloc return -- &block->ptr: 10B77E190
+
+f(MALLOC), ptr49
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 52296 - size 512 type 1
+malloc return -- &block->ptr: 10B77E3B8
+
+f(MALLOC), ptr67
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 51744 - size 512 type 1
+malloc return -- &block->ptr: 10B77E5E0
+
+f(MALLOC), ptr52
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 51192 - size 512 type 1
+malloc return -- &block->ptr: 10B77E808
+
+f(MALLOC), ptr54
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 50640 - size 512 type 1
+malloc return -- &block->ptr: 10B77EA30
+
+f(MALLOC), ptr12
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 8000 - size 16 type 0
+malloc return -- &block->ptr: 10B78B0C0
+
+f(MALLOC), ptr45
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 50088 - size 512 type 1
+malloc return -- &block->ptr: 10B77EC58
+
+f(MALLOC), ptr102
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 49536 - size 512 type 1
+malloc return -- &block->ptr: 10B77EE80
+
+f(free), addr0
+f(MALLOC), ptr16
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 7944 - size 16 type 0
+malloc return -- &block->ptr: 10B78B0F8
+
+f(MALLOC), ptr64
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 48984 - size 512 type 1
+malloc return -- &block->ptr: 10B77F0A8
+
+f(MALLOC), ptr14
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 7888 - size 16 type 0
+malloc return -- &block->ptr: 10B78B130
+
+f(realloc), ptr: 0 , size : 256
+f(MALLOC), ptr256
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 48432 - size 512 type 1
+malloc return -- &block->ptr: 10B77F2D0
+
+f(free), addr10B77F2D0FFFFFF
+Map found: 10B77D000
+f(browse_map)
+f(update_map_blocks)
+f(block if count) 0, type 1, block->next 10B77D250 (*map)->block 10B77D028 block 10B77D028
+f(update_map_blocks)
+f(block if count) 1, type 1, block->next 10B77D478 (*map)->block 10B77D028 block 10B77D250
+f(update_map_blocks)
+f(block if count) 2, type 1, block->next 10B77D6A0 (*map)->block 10B77D028 block 10B77D478
+f(update_map_blocks)
+f(block if count) 3, type 1, block->next 10B77D8C8 (*map)->block 10B77D028 block 10B77D6A0
+f(update_map_blocks)
+f(block if count) 4, type 1, block->next 10B77DAF0 (*map)->block 10B77D028 block 10B77D8C8
+f(update_map_blocks)
+f(block if count) 5, type 1, block->next 10B77DD18 (*map)->block 10B77D028 block 10B77DAF0
+f(update_map_blocks)
+f(block if count) 6, type 1, block->next 10B77DF40 (*map)->block 10B77D028 block 10B77DD18
+f(update_map_blocks)
+f(block if count) 7, type 1, block->next 10B77E168 (*map)->block 10B77D028 block 10B77DF40
+f(update_map_blocks)
+f(block if count) 8, type 1, block->next 10B77E390 (*map)->block 10B77D028 block 10B77E168
+f(update_map_blocks)
+f(block if count) 9, type 1, block->next 10B77E5B8 (*map)->block 10B77D028 block 10B77E390
+f(update_map_blocks)
+f(block if count) 10, type 1, block->next 10B77E7E0 (*map)->block 10B77D028 block 10B77E5B8
+f(update_map_blocks)
+f(block if count) 11, type 1, block->next 10B77EA08 (*map)->block 10B77D028 block 10B77E7E0
+f(update_map_blocks)
+f(block if count) 12, type 1, block->next 10B77EC30 (*map)->block 10B77D028 block 10B77EA08
+f(update_map_blocks)
+f(block if count) 13, type 1, block->next 10B77EE58 (*map)->block 10B77D028 block 10B77EC30
+f(update_map_blocks)
+f(block if count) 14, type 1, block->next 10B77F080 (*map)->block 10B77D028 block 10B77EE58
+f(update_map_blocks)
+f(block if count) 15, type 1, block->next 10B77F2A8 (*map)->block 10B77D028 block 10B77F080
+f(update_map_blocks)
+merge blocks
+f(block if count) 16, type 1, block->next 0 (*map)->block 10B77D028 block 10B77F2A8
+BM ::: END
+
+f(MALLOC), ptr131072
+f(get_map_lst)
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 135088 - size 131072 type 2
+malloc return -- &block->ptr: 10B78D050
+
+f(MALLOC), ptr1024
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 4016 - size 1024 type 2
+malloc return -- &block->ptr: 10B7AE050
+
+f(MALLOC), ptr4096
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 8112 - size 4096 type 2
+malloc return -- &block->ptr: 10B7AF050
+
+f(free), addr10B7AE050FFFFFFFFFFFFFFFFFFFF
+Map found: 10B7AE000
+f(browse_map)
+f(update_map_blocks)
+merge blocks
+f(block if count) 0, type 2, block->next 0 (*map)->block 10B7AE028 block 10B7AE028
+f(munmap_and_update_maps), map IN addr: 10B7AE000
+f(munmap_and_update_maps), map OUT addr: 10B7AF000
+f(MALLOC), ptr4096
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 8112 - size 4096 type 2
+malloc return -- &block->ptr: 10B7B1050
+
+f(free), addr10B7AF050FFFFFFFFFFFFFFFFFFFF
+Map found: 10B7AF000
+f(browse_map)
+f(update_map_blocks)
+merge blocks
+f(block if count) 0, type 2, block->next 0 (*map)->block 10B7AF028 block 10B7AF028
+f(munmap_and_update_maps), map IN addr: 10B7AF000
+f(munmap_and_update_maps), map OUT addr: 10B7B1000
+f(MALLOC), ptr4096
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 8112 - size 4096 type 2
+malloc return -- &block->ptr: 10B7AE050
+
+f(free), addr10B7B1050FFFFFFFFFFFFFFFFFFFF
+Map found: 10B7B1000
+f(browse_map)
+f(update_map_blocks)
+merge blocks
+f(block if count) 0, type 2, block->next 0 (*map)->block 10B7B1028 block 10B7B1028
+f(munmap_and_update_maps), map IN addr: 10B7B1000
+f(munmap_and_update_maps), map OUT addr: 10B7AE000
+f(MALLOC), ptr4096
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 8112 - size 4096 type 2
+malloc return -- &block->ptr: 10B7B0050
+
+f(free), addr10B7AE050FFFFFFFFFFFFFFFFFFFF
+Map found: 10B7AE000
+f(browse_map)
+f(update_map_blocks)
+merge blocks
+f(block if count) 0, type 2, block->next 0 (*map)->block 10B7AE028 block 10B7AE028
+f(munmap_and_update_maps), map IN addr: 10B7AE000
+f(munmap_and_update_maps), map OUT addr: 10B7B0000
+f(MALLOC), ptr4096
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 8112 - size 4096 type 2
+malloc return -- &block->ptr: 10B7AE050
+
+f(free), addr10B7B0050FFFFFFFFFFFFFFFFFFFF
+Map found: 10B7B0000
+f(browse_map)
+f(update_map_blocks)
+merge blocks
+f(block if count) 0, type 2, block->next 0 (*map)->block 10B7B0028 block 10B7B0028
+f(munmap_and_update_maps), map IN addr: 10B7B0000
+f(munmap_and_update_maps), map OUT addr: 10B7AE000
+f(MALLOC), ptr4096
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 8112 - size 4096 type 2
+malloc return -- &block->ptr: 10B7B0050
+
+f(free), addr10B7AE050FFFFFFFFFFFFFFFFFFFF
+Map found: 10B7AE000
+f(browse_map)
+f(update_map_blocks)
+merge blocks
+f(block if count) 0, type 2, block->next 0 (*map)->block 10B7AE028 block 10B7AE028
+f(munmap_and_update_maps), map IN addr: 10B7AE000
+f(munmap_and_update_maps), map OUT addr: 10B7B0000
+f(MALLOC), ptr4096
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 8112 - size 4096 type 2
+malloc return -- &block->ptr: 10B7AE050
+
+f(free), addr10B7B0050FFFFFFFFFFFFFFFFFFFF
+Map found: 10B7B0000
+f(browse_map)
+f(update_map_blocks)
+merge blocks
+f(block if count) 0, type 2, block->next 0 (*map)->block 10B7B0028 block 10B7B0028
+f(munmap_and_update_maps), map IN addr: 10B7B0000
+f(munmap_and_update_maps), map OUT addr: 10B7AE000
+f(MALLOC), ptr4096
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 8112 - size 4096 type 2
+malloc return -- &block->ptr: 10B7B0050
+
+f(free), addr10B7AE050FFFFFFFFFFFFFFFFFFFF
+Map found: 10B7AE000
+f(browse_map)
+f(update_map_blocks)
+merge blocks
+f(block if count) 0, type 2, block->next 0 (*map)->block 10B7AE028 block 10B7AE028
+f(munmap_and_update_maps), map IN addr: 10B7AE000
+f(munmap_and_update_maps), map OUT addr: 10B7B0000
+f(MALLOC), ptr4096
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 8112 - size 4096 type 2
+malloc return -- &block->ptr: 10B7AE050
+
+f(free), addr10B7B0050FFFFFFFFFFFFFFFFFFFF
+Map found: 10B7B0000
+f(browse_map)
+f(update_map_blocks)
+merge blocks
+f(block if count) 0, type 2, block->next 0 (*map)->block 10B7B0028 block 10B7B0028
+f(munmap_and_update_maps), map IN addr: 10B7B0000
+f(munmap_and_update_maps), map OUT addr: 10B7AE000
+f(MALLOC), ptr336
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 48432 - size 512 type 1
+malloc return -- &block->ptr: 10B77F2D0
+
+f(MALLOC), ptr2
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 7832 - size 16 type 0
+malloc return -- &block->ptr: 10B78B168
+
+f(MALLOC), ptr1025
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 4016 - size 1025 type 2
+malloc return -- &block->ptr: 10B7B0050
+
+f(MALLOC), ptr1024
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 4016 - size 1024 type 2
+malloc return -- &block->ptr: 10B7B1050
+
+f(MALLOC), ptr4096
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 8112 - size 4096 type 2
+malloc return -- &block->ptr: 10B7B2050
+
+f(MALLOC), ptr2160
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 4016 - size 2160 type 2
+malloc return -- &block->ptr: 10B7B4050
+
+f(free), addr10B7B2050FFFFFFFFFFFFFFFFFFFFFFF
+Map found: 10B7B2000
+f(browse_map)
+f(update_map_blocks)
+merge blocks
+f(block if count) 0, type 2, block->next 0 (*map)->block 10B7B2028 block 10B7B2028
+f(munmap_and_update_maps), map IN addr: 10B7B2000
+f(munmap_and_update_maps), map OUT addr: 10B7B4000
+f(MALLOC), ptr3312
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 4016 - size 3312 type 2
+malloc return -- &block->ptr: 10B7B2050
+
+f(MALLOC), ptr4096
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 8112 - size 4096 type 2
+malloc return -- &block->ptr: 10B7B5050
+
+f(realloc), ptr: 10B7B2050 , size : 91556
+global 10B74C040 type 0
+f(find_map)
+page->count 2
+f(find_map)
+page->count 2
+f(find_map)
+global 10B74C048 type 1
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+global 10B74C050 type 2
+f(find_map) map->next
+f(find_map) map->next
+f(find_map) map->next
+f(find_map) map->next
+f(find_map) map->next
+f(find_map)
+Map found
+f(browse_map)
+f(update_malloc)
+f(if block->size < size). free& malloc, snewize :91556 oldsize :3312
+f(MALLOC), ptr91556
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 94128 - size 91556 type 2
+malloc return -- &block->ptr: 10B7B7050
+env_macos.sh: line 6: 17401 Segmentation fault: 11  $@

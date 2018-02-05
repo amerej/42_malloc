@@ -53,7 +53,7 @@ static void		mumnmap_and_update_maps(t_map **map)
 	todel = NULL;
 }
 
-static void		browse_found_map(t_map **map, t_block *to_free, int type)
+static void		browse_found_map(t_map **map, t_block *to_free, int maptype)
 {
 	t_block		*block;
 	int count =0;
@@ -65,10 +65,13 @@ static void		browse_found_map(t_map **map, t_block *to_free, int type)
 	while (block)
 	{
 		update_map_blocks(block);
-		ft_putstr("\nf(block if count)");
-		ft_putnbr_base((long)count++, 10);
+		ft_putstr("\nf(block if count) "); ft_putnbr_base((long)count++, 10);
+		ft_putstr(", type "); ft_putnbr_base((long)maptype, 10);
+		ft_putstr(", block->next "); ft_putnbr_base((long)block->next, 16);
+		ft_putstr(" (*map)->block "); ft_putnbr_base((long)(*map)->block, 16);
+		ft_putstr(" block "); ft_putnbr_base((long)block, 16);
 
-		if (type == LARGE ||
+		if (maptype == LARGE ||
 			(block->free && !block->next && block == (*map)->block)) // NE RENTRE PAS DANS LA CDT
 		{
 			mumnmap_and_update_maps(map);
@@ -79,19 +82,23 @@ static void		browse_found_map(t_map **map, t_block *to_free, int type)
 	ft_putstr("\nBM ::: END\n");
 }
 
-static int		find_map(t_map **map, void *ptr, int type, size_t page)
+static int		find_map(t_map **map, void *ptr, size_t page)
 {
+	int		maptype;
+
+	maptype = get_type((*map)->block->size);
+	ft_putstr("F");
   	if ((long)((void*)*map + getpagesize() * page) == ((long)ptr & 0xFFFFFFFFF000)) // remove FFF on macOS
   	{
 		ft_putstr("\nMap found: ");
 		ft_putnbr_base((long)*map, 16);		
-	 	browse_found_map(map, ptr - BLOCK_SIZE, type);
+	 	browse_found_map(map, ptr - BLOCK_SIZE, maptype);
 		return TRUE;
 	}
-	else if (type != LARGE && (*map)->page_count > page)
-		return find_map(map, ptr, type, page + 1);
+	else if (maptype != LARGE && (*map)->page_count > page)
+		return find_map(map, ptr, page + 1);
 	else if ((*map)->next)
-		return find_map(&(*map)->next, ptr, type, 0);
+		return find_map(&(*map)->next, ptr, 0);
 	return FALSE;
 }
 
@@ -106,7 +113,7 @@ void			free(void *ptr)
 	while (type < MAX_TYPE)
 	{
 		if (g_types_tab[type]) {
-			if (find_map(&g_types_tab[type], ptr, type, 0))
+			if (find_map(&g_types_tab[type], ptr, 0))
 			{
 				// show_alloc_mem();					
 				return;

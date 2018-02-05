@@ -34,11 +34,13 @@ size_t		get_size(size_t size)
 
 void		ft_putchar(char c)
 {
+	return ;
 	write(2, &c, 1);
 }
 
 void	ft_putstr(char *str)
 {
+	return;
 	size_t i;
 	
 	i = 0;
@@ -49,6 +51,7 @@ void	ft_putstr(char *str)
 
 void	ft_putnbr_base(long nb, int base)
 {
+	return;
 	char	*str;
 
 	str = "0123456789ABCDEF";

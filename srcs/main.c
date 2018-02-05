@@ -35,23 +35,23 @@ int main (int argc, char** argv)
 	// 	++i;
 	// }
 
-	char *str1 = (char*)malloc(16);
-	char *str2 = (char*)malloc(22);
-	char *str3 = (char*)malloc(323);
-	char *str4 = (char*)malloc(4);
-	char *str5 = (char*)malloc(5);
-	char *str6 = (char*)malloc(1);
+	// char *str1 = (char*)malloc(16);
+	// char *str2 = (char*)malloc(22);
+	// char *str3 = (char*)malloc(323);
+	// char *str4 = (char*)malloc(4);
+	// char *str5 = (char*)malloc(5);
+	// char *str6 = (char*)malloc(1);
 	char *str7 = (char*)malloc(6);
-	char *str10 = (char*)malloc(97);
-	char *str15 = (char*)malloc(4023423421);	
-	char *str14 = (char*)malloc(40914);	
+	// char *str10 = (char*)malloc(97);
+	// char *str11 = (char*)malloc(36700093186723);			
+	// char *str12 = (char*)malloc(454523594);
+	// char *str13 = (char*)malloc(40923423212);	
+	// char *str14 = (char*)malloc(40914);	
+	// char *str15 = (char*)malloc(4023423421);	
 	char *str16 = (char*)malloc(3005);
-	char *str11 = (char*)malloc(36700093186723);			
-	char *str12 = (char*)malloc(454523594);
-	char *str13 = (char*)malloc(40923423212);	
-	char *str17 = (char*)malloc(3000);		
-	char *str18 = (char*)malloc(3100);		
-	char *str19 = (char*)malloc(200);
+	char *str17 = (char*)malloc(3100);		
+	// char *str18 = (char*)malloc(3000);		
+	char *str19 = (char*)malloc(2);
 
 	ft_putstr("\nDONE MALLOCING\n");
 
@@ -65,23 +65,23 @@ int main (int argc, char** argv)
 
 	show_alloc_mem();
 	
-	free(str15);
-	free(str14); //show_alloc_mem();
-	free(str16);
-	free(str11); //show_alloc_mem();
-	free(str13); //show_alloc_mem();
-	free(str12); //show_alloc_mem();
-	free(str10); //show_alloc_mem();
-	free(str6); //show_alloc_mem();
-	free(str2); //show_alloc_mem();
-	free(str4);	//show_alloc_mem();
-	free(str7);	//show_alloc_mem();
-	free(str3); //show_alloc_mem();
-	free(str5); //show_alloc_mem();
-	free(str1); //show_alloc_mem();
-	free(str17); //show_alloc_mem();
-	free(str18); //show_alloc_mem();
-	free(str19);
+	// ft_putstr("\n\nfree 1"); free(str1); //show_alloc_mem();
+	// ft_putstr("\n\nfree 2"); free(str2); //show_alloc_mem();
+	// ft_putstr("\n\nfree 3"); free(str3); //show_alloc_mem();
+	// ft_putstr("\n\nfree 4"); free(str4);	//show_alloc_mem();
+	// ft_putstr("\n\nfree 5"); free(str5); //show_alloc_mem();
+	// ft_putstr("\n\nfree 6"); free(str6); //show_alloc_mem();
+	ft_putstr("\n\nfree 7"); free(str7);	//show_alloc_mem();
+	// ft_putstr("\n\nfree 10"); free(str10); //show_alloc_mem();
+	// ft_putstr("\n\nfree 11"); free(str11); //show_alloc_mem();
+	// ft_putstr("\n\nfree 12"); free(str12); //show_alloc_mem();
+	// ft_putstr("\n\nfree 13"); free(str13); //show_alloc_mem();
+	// ft_putstr("\n\nfree 14"); free(str14); //show_alloc_mem();
+	// ft_putstr("\n\nfree 15"); free(str15);
+	ft_putstr("\n\nfree 16"); free(str16);
+	ft_putstr("\n\nfree 17"); free(str17); //show_alloc_mem();
+	// ft_putstr("\n\nfree 18"); free(str18); //show_alloc_mem();
+	ft_putstr("\n\nfree 19"); free(str19);
 	ft_putstr("\nDONE FREEING\n");
 	show_alloc_mem();
 }

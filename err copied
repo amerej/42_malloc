@@ -1,0 +1,157 @@
+f(free), addr7FEE51005E80
+f(free), addr0
+f(MALLOC), ptr32768
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block) block->next oldsize 36784 - size 32768 type 2
+malloc return -- &block->ptr: 10AD0E050
+
+f(free), addr10AD0E050
+Map found: 10AD0E000
+f(browse_map)
+f(update_map_blocks)
+merge blocks
+f(block if count)0
+f(munmap_and_update_maps), map IN addr: 10AD0E000
+f(munmap_and_update_maps), map OUT addr: 0
+f(realloc), ptr: 10AD0B050 , size : 81824
+global 10AC83040 type 0
+f(find_map)
+page->count 2
+f(find_map)
+page->count 2
+f(find_map) map->next
+f(find_map)
+page->count 2
+f(find_map)
+page->count 2
+f(find_map)
+global 10AC83048 type 1
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map) map->next
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map) map->next
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+page->count 14
+f(find_map)
+global 10AC83050 type 2
+f(find_map) map->next
+f(find_map) map->next
+f(find_map) map->next
+f(find_map) map->next
+f(find_map) map->next
+f(find_map)
+Map found
+f(browse_map)
+f(update_malloc)
+f(if block->size < size). free& malloc, snewize :81824 oldsize :11192
+f(MALLOC), ptr81824
+f(get_map_lst)
+f(get block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+f(get fiteable block)
+end of map loop, no result -> create_map
+f(create_map)
+f(init_map)
+f(create block)
+f(get block)
+f(get fiteable block)
+f(update map blocks)
+f(create block)env_macos.sh: line 6: 70882 Segmentation fault: 11  $@

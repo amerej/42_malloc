@@ -65,40 +65,9 @@ static void	print_alloc_mem_type(int type, char *str_type)
 	print_maps(g_types_tab[type], 0);
 }
 
-void		print()
-{
-	int		type;
-	t_map	*map;
-	t_block	*block;
-	t_map	*eta;
-
-	type = 0;
-	while (type < MAX_TYPE)
-	{
-		ft_putstr("\ntype: ");
-		ft_putnbr_base((long)type, 10);
-		if ((map = g_types_tab[type])) {
-			while (map)
-			{
-				block = map->block;
-				eta = (void*)map + getpagesize() * map->page_count;
-				ft_putstr("\neta:   "); ft_putnbr_base((long)eta, 16);
-				while (block)// && block < eta)
-				{
-					ft_putstr("\nblock: "); ft_putnbr_base((long)block, 16);
-					block = block->next;
-				}
-				map = map->next;
-			}
-		}
-		type++;
-	}
-}
-
 void		show_alloc_mem(void)
 {
 	// return;
-	// print();	
 	ft_putstr("\n");
 	print_alloc_mem_type(TINY, "TINY");
 	ft_putstr("\n");	
