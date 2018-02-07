@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/02/04 14:06:11 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/02/07 15:06:05 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_map			*create_map(int type, size_t size, t_map *prevmap)
 	size_t	psize;
 	size_t	mapsize;
 
+	map = NULL;
 	ft_putstr("\nf(create_map)");
 	/*
 	** mapsize formula
@@ -45,7 +46,7 @@ t_map			*create_map(int type, size_t size, t_map *prevmap)
 	psize = (size_t)getpagesize();
 
 	mapsize = (size > SMALL_SIZE) ?
-		((size + BLOCK_SIZE + MAP_SIZE - 1) / psize + 1) * psize :
+		((size + BLOCK_SIZE * 2 + MAP_SIZE - 1) / psize + 1) * psize :
 		(((size + BLOCK_SIZE) * 100 + MAP_SIZE - 1) / psize + 1) * psize;
 
 	if ((map = mmap(NULL, mapsize, PROT_READ | PROT_WRITE,
@@ -54,11 +55,16 @@ t_map			*create_map(int type, size_t size, t_map *prevmap)
 			return (NULL);
 		}
 
+	// ft_putstr(" g_types_large: "); ft_putnbr_base((long)map, 16);
+	
+	init_map(&map, mapsize, prevmap);
 	// init g_type list if not exist else list is updated in get_block
 	if (g_types_tab[type] == NULL)
 		g_types_tab[type] = map;
 
-	init_map(&map, mapsize, prevmap);
+	if (g_types_tab[type])
+		g_types_tab[type]->last = map;
+
 	return map;
 }
 
@@ -70,7 +76,14 @@ t_map			*create_map(int type, size_t size, t_map *prevmap)
 t_map		    *get_map_lst(int type, size_t size)
 {
 	ft_putstr("\nf(get_map_lst)");
+	ft_putstr(" type: "); ft_putnbr_base((long)type, 10);
+
 	
+	if (type == LARGE && g_types_tab[LARGE])
+	{
+		ft_putstr(" g_types_large: "); ft_putnbr_base((long)g_types_tab[LARGE]->last, 16);
+		return g_types_tab[LARGE]->last;
+	}
 	return ((g_types_tab[type]) ?
 		g_types_tab[type] :
 		create_map(type, size, NULL));

@@ -6,13 +6,13 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/02/04 17:21:02 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/02/07 15:01:01 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
 
-static t_block	*get_fiteable_block(t_map *map, int type, size_t size)
+static t_block	*get_fiteable_block(t_map *map, size_t size)
 {
 	t_block	*block;
 
@@ -76,14 +76,14 @@ t_block		    *get_block(t_map *map, int type, size_t size)
 
 	ft_putstr("\nf(get block)");
 
-	block = NULL;	
-
+	block = NULL;
 	while (map) // si on ajoute get_map en wrapper on peut faire get_map en recursive, + propre
 	{
-
+		ft_putstr("\nSF in here");
+		// ft_putstr(" map: "); ft_putnbr_base((long)&map, 16);
 		if ((type != LARGE && map->free_space >= size + BLOCK_SIZE
-			&& (block = get_fiteable_block(map, type, size))) || (type == LARGE
-			&& map->block == (block = get_fiteable_block(map, type, size))))
+			&& (block = get_fiteable_block(map, size))) || (type == LARGE
+			&& map->block == (block = get_fiteable_block(map, size))))
 		{
 			update_map_blocks(map, block, type, size);
 			return block;
@@ -96,6 +96,5 @@ t_block		    *get_block(t_map *map, int type, size_t size)
 	
 	if (!(cur_map->next = create_map(type, size, cur_map)))
 		return NULL;
-	
 	return (get_block(cur_map->next, type, size));
 }

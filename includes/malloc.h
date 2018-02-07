@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:39:37 by aditsch           #+#    #+#             */
-/*   Updated: 2018/01/27 12:37:30 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/02/06 11:57:23 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct				s_map
 	struct s_block			*block;
 	struct s_map			*prev;
 	struct s_map			*next;
+	struct s_map			*last;
 }							t_map;
 
 # define TINY_SIZE 16

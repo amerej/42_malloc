@@ -42,15 +42,14 @@ static void		*update_malloc(t_map **map, t_block *block, size_t size)
 		ft_putstr(" oldsize :");
 		ft_putnbr_base((long)block->size, 10);
 		new_ptr = malloc(size);
-		new_ptr = ft_memcpy(new_ptr, block->ptr, (block->size > size) ? block->size : size);
+		ft_putstr("\nMALLOC DNE\n");		
+		new_ptr = ft_memcpy(new_ptr, block->ptr, (block->size > size) ? size : block->size);
 		free(block->ptr);
+		ft_putstr("\nMALLOC DNE\n");			
 		return (new_ptr);
 	}
-    else // if (block->size >= size)
-	{
-		ft_putstr("\nelse just dont change a thing");
-		return (block->ptr);
-	}
+	ft_putstr("\nelse just dont change a thing");
+	return (block->ptr);
 }
 
 static void		*browse_found_map(t_map **map, t_block *to_realloc, size_t size)
@@ -81,7 +80,7 @@ static void		*find_map(t_map **map, void *ptr, size_t size, int page)
 		ft_putstr("\nMap found");
 		return browse_found_map(map, ptr - BLOCK_SIZE, size);
 	}
-	else if (maptype != LARGE && (*map)->page_count > (size_t)page)
+	else if (maptype != LARGE && (*map)->page_count > (size_t)page - 1)
 	{
 		ft_putstr("\npage->count "); ft_putnbr_base((long)(*map)->page_count, 10);
 		return find_map(map, ptr, size, page + 1);
@@ -98,9 +97,9 @@ void			*realloc(void *ptr, size_t size)
 {
 	int		type;
     void    *realloced_ptr;
+	show_alloc_mem();
 	ft_putstr("\nf(realloc), ptr: ");ft_putnbr_base((long)ptr, 16);
 	ft_putstr(" , size : ");ft_putnbr_base((long)size, 10);	
-	// show_alloc_mem();
 
 	type = 0;
 	if (ptr == NULL)
@@ -119,6 +118,7 @@ void			*realloc(void *ptr, size_t size)
 			if ((realloced_ptr = find_map(&g_types_tab[type], ptr, size, 0)))
 			{
 				// show_alloc_mem();
+				ft_putstr("\nf(realloc) RETURN: "); ft_putnbr_base((long)realloced_ptr, 16);					
 				return realloced_ptr;
 			}
 		}
@@ -126,6 +126,6 @@ void			*realloc(void *ptr, size_t size)
 	}
 	// show_alloc_mem();
 
-	ft_putstr("\nf(realloc) NOTHING FOUND: ");ft_putnbr_base((long)ptr, 16);	
+	ft_putstr("\nf(realloc) NOTHING FOUND: "); ft_putnbr_base((long)ptr, 16);	
     return ptr;
 }

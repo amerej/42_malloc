@@ -6,7 +6,7 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/02/04 16:39:36 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/02/07 14:52:11 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	*malloc(size_t size)
 	int				type;
 	struct rlimit	rt;
 
-	ft_putstr("\nf(MALLOC), ptr"); ft_putnbr_base((long)size, 10); 
+	ft_putstr("\nf(MALLOC), size "); ft_putnbr_base((long)size, 10); 
 
 	if (!size || getrlimit(RLIMIT_AS, &rt) || rt.rlim_max < size)
 		return (NULL);

@@ -14,54 +14,50 @@ void	ft_strlcpy(char *str, int len)
 
 int main (int argc, char** argv)
 {
-	int i = 0;
-	int	random = 0;
 	ft_putstr(">>> MAIN TEST <<<\n");	
-	// while (i < 5)
+	
+	// int i = 0;
+	// char	**tab[55001];
+	// size_t	random = 0;
+	// while (i < 3)
 	// {
-	// 	random = 5; //rand();
-	// 	str = (char *)malloc(random);
-
-	// 	ft_strlcpy(str, random);
+	// 	random = rand();
 		
-	// 	ft_putstr("\nSTR VALUE AFTER MALLOC (");
-	// 	ft_putnbr(random);
-	// 	ft_putstr(") ->>>>>>>>>>>>> ");
-	// 	ft_putstr(str);
-	// 	ft_putstr("\n");
-
-	// 	free(str);
+	// 	tab[i] = (char *)malloc(random);
 		
+	// 	// show_alloc_mem();
 	// 	++i;
 	// }
 
-	// char *str1 = (char*)malloc(16);
-	// char *str2 = (char*)malloc(22);
-	// char *str3 = (char*)malloc(323);
-	// char *str4 = (char*)malloc(4);
-	// char *str5 = (char*)malloc(5);
-	// char *str6 = (char*)malloc(1);
-	char *str7 = (char*)malloc(6);
+	char *str1 = (char*)malloc(776);
+	// char *str2 = (char*)malloc(952);
+	// char *str3 = (char*)malloc(776);
+	// char *str4 = (char*)malloc(952);
+	// char *str5 = (char*)malloc(19200);
+	// char *str6 = (char*)malloc(768);
+	// char *str7 = (char*)malloc(6);
 	// char *str10 = (char*)malloc(97);
 	// char *str11 = (char*)malloc(36700093186723);			
 	// char *str12 = (char*)malloc(454523594);
 	// char *str13 = (char*)malloc(40923423212);	
 	// char *str14 = (char*)malloc(40914);	
 	// char *str15 = (char*)malloc(4023423421);	
-	char *str16 = (char*)malloc(3005);
-	char *str17 = (char*)malloc(3100);		
-	// char *str18 = (char*)malloc(3000);		
-	char *str19 = (char*)malloc(2);
+	// char *str16 = (char*)malloc(0);
+	// char *str17 = (char*)malloc(768);	
+	
+	// char *small = (char*)malloc(17);
+	// char *tiny = (char*)malloc(16);
 
 	ft_putstr("\nDONE MALLOCING\n");
 
 	show_alloc_mem();
 
-	// str19 = (char*)realloc(str19, 11232);				
+
+	// str7 = (char*)realloc(NULL, 768);				
 	
 	ft_putstr("\nDONE REALLOCING\n");
 
-	// ft_strlcpy(str19, 11232);
+	// // ft_strlcpy(str19, 11232);
 
 	show_alloc_mem();
 	
@@ -71,18 +67,25 @@ int main (int argc, char** argv)
 	// ft_putstr("\n\nfree 4"); free(str4);	//show_alloc_mem();
 	// ft_putstr("\n\nfree 5"); free(str5); //show_alloc_mem();
 	// ft_putstr("\n\nfree 6"); free(str6); //show_alloc_mem();
-	ft_putstr("\n\nfree 7"); free(str7);	//show_alloc_mem();
+	// ft_putstr("\n\nfree 7"); free(str7);	//show_alloc_mem();
 	// ft_putstr("\n\nfree 10"); free(str10); //show_alloc_mem();
 	// ft_putstr("\n\nfree 11"); free(str11); //show_alloc_mem();
 	// ft_putstr("\n\nfree 12"); free(str12); //show_alloc_mem();
 	// ft_putstr("\n\nfree 13"); free(str13); //show_alloc_mem();
 	// ft_putstr("\n\nfree 14"); free(str14); //show_alloc_mem();
 	// ft_putstr("\n\nfree 15"); free(str15);
-	ft_putstr("\n\nfree 16"); free(str16);
-	ft_putstr("\n\nfree 17"); free(str17); //show_alloc_mem();
-	// ft_putstr("\n\nfree 18"); free(str18); //show_alloc_mem();
-	ft_putstr("\n\nfree 19"); free(str19);
+	// ft_putstr("\n\nfree 16"); free(str16);
+	// ft_putstr("\n\nfree 17"); free(str17); //show_alloc_mem();
+	// ft_putstr("\n\nfree tiny"); free(tiny);
+	// ft_putstr("\n\nfree small"); free(small);
 	ft_putstr("\nDONE FREEING\n");
+
+	// while (i >= 0)
+	// {
+	// 	free(tab[i]);
+	// 	--i;
+	// }
+
 	show_alloc_mem();
 }
 
