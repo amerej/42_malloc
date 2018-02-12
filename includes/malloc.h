@@ -36,7 +36,6 @@ typedef struct				s_block
 		t_bool				free;
 		size_t				size;
 		void				*ptr;
-		struct s_block		*prev;
 		struct s_block		*next;
 }							t_block;
 
@@ -45,6 +44,7 @@ typedef struct				s_map
 {
 	size_t					free_space;
 	size_t					page_count;	
+	int						type;
 	struct s_block			*block;
 	struct s_map			*prev;
 	struct s_map			*next;

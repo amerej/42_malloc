@@ -54,8 +54,8 @@ void	*malloc(size_t size)
 	if (!size || getrlimit(RLIMIT_AS, &rt) || rt.rlim_max < size)
 		return (NULL);
 
-	type = get_type(size);
 	size = get_size(size);
+	type = get_type(size);
 	
 	if (!(map_lst = get_map_lst(type, size))) // get the right map type to work on
 		return (NULL);
