@@ -1,1 +1,1 @@
-make re && echo "\nCOMMAND RESULTS\n" && sh env_linux.sh $1 2> /dev/pts/0
+make re && echo "\nCOMMAND RESULTS\n" && sh env_macos.sh $1 2> /dev/ttys001
