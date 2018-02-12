@@ -6,15 +6,15 @@
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/02/07 15:28:29 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/02/11 19:40:10 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
 
-static void		update_map_blocks(t_block *block)
+static int		update_map_blocks(t_block *block)
 {
-	ft_putstr("\nf(update_map_blocks), is free ?");
+	ft_putstr("\nf(update_map_blocks), is free ? ");
 	ft_putnbr_base((long)block->free, 10);	
 
 	if (block->free == TRUE && block->next && block->next->free == TRUE)
@@ -26,9 +26,11 @@ static void		update_map_blocks(t_block *block)
 		{
 			block->next->prev = block;
 			if (block->next->free == TRUE)
-				update_map_blocks(block);
+				return (update_map_blocks(block));
 		}
+		return (TRUE);
 	}
+	return (FALSE);
 }
 
 static void		mumnmap_and_update_maps(t_map **map, int maptype)
@@ -66,8 +68,10 @@ static void		mumnmap_and_update_maps(t_map **map, int maptype)
 static void		browse_found_map(t_map **map, t_block *to_free, int maptype)
 {
 	t_block		*block;
+	int			is_updated;
 	int count =0;
 
+	is_updated = 0;
 	ft_putstr("\nf(browse_map), to free addr: ");
 	ft_putnbr_base((long)to_free, 16);
 
@@ -76,7 +80,7 @@ static void		browse_found_map(t_map **map, t_block *to_free, int maptype)
 	block = (*map)->block; // NO MAPS BLOCK
 	while (block)
 	{
-		update_map_blocks(block);
+		is_updated = update_map_blocks(block);
 		ft_putstr("\nf(block if count) "); ft_putnbr_base((long)count++, 10);
 		ft_putstr(", map type "); ft_putnbr_base((long)maptype, 10);
 		ft_putstr(", to_free type "); ft_putnbr_base((long)get_type(to_free->size), 10);
@@ -90,6 +94,8 @@ static void		browse_found_map(t_map **map, t_block *to_free, int maptype)
 			mumnmap_and_update_maps(map, maptype);
 			return;
 		}
+		if (is_updated)
+			return ;
 		block = block->next;
 	}
 	ft_putstr("\nBM ::: END\n");
@@ -126,7 +132,7 @@ static int		find_map(t_map **map, void *ptr, size_t page)
 void			free(void *ptr)
 {
 	int		type;
-	ft_putstr("\nf(free), addr"); ft_putnbr_base((long)ptr, 16);
+	ft_putstr("\nf(free), addr: "); ft_putnbr_base((long)ptr, 16);
 
 	type = 0;
 	if (ptr == NULL)
@@ -138,7 +144,7 @@ void			free(void *ptr)
 		if (g_types_tab[type]) {
 			if (find_map(&g_types_tab[type], ptr, 0))
 			{
-				// show_alloc_mem();					
+				show_alloc_mem();					
 				return;
 			}
 		}

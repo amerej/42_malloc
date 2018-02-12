@@ -6,7 +6,7 @@
 #    By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/02 15:03:29 by aditsch           #+#    #+#              #
-#    Updated: 2018/02/07 12:21:36 by gpoblon          ###   ########.fr        #
+#    Updated: 2018/02/08 22:02:18 by gpoblon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wextra -Wall -fpic -I$(INC_PATH)
+CFLAGS = -Wextra -Wall -fpic -ggdb -I$(INC_PATH)
 
 .PHONY: all, clean, fclean, re
 

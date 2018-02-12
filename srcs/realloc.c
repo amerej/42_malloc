@@ -43,7 +43,10 @@ static void		*update_malloc(t_map **map, t_block *block, size_t size)
 		ft_putnbr_base((long)block->size, 10);
 		new_ptr = malloc(size);
 		ft_putstr("\nMALLOC DNE\n");		
-		new_ptr = ft_memcpy(new_ptr, block->ptr, (block->size > size) ? size : block->size);
+		if (new_ptr != NULL)
+			ft_memcpy(new_ptr, block->ptr, (block->size < size) ? block->size : size);
+		else
+			exit(1);
 		free(block->ptr);
 		ft_putstr("\nMALLOC DNE\n");			
 		return (new_ptr);
