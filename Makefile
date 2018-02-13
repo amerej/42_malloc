@@ -28,6 +28,7 @@ SRCS =	srcs/thread_safe.c \
 		srcs/utils.c \
 		srcs/show_alloc_mem.c \
 		srcs/show_alloc_mem_hex.c \
+		srcs/show_alloc_mem_full.c \
 		srcs/calloc.c
 
 INC_PATH = includes/

@@ -91,5 +91,7 @@ void					ft_putstr(char *str);
 void					ft_putnbr_base(long n, int base);
 
 void					show_alloc_mem(void);
+void					show_alloc_mem_full(void);
+void					show_alloc_mem_hex(void);
 
 #endif
