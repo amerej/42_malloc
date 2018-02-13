@@ -40,14 +40,12 @@ static void		mumnmap_and_update_maps(t_map **map, int maptype)
 		(*map)->prev = todel->prev;
 	else if (todel->prev)
 		todel->prev->next = NULL;
-
 	if (!todel->next && todel->prev)
 		g_types_tab[maptype]->last = todel->prev;
 	else if (!todel->next && !todel->prev)
 		g_types_tab[maptype] = NULL;
 	else
 		g_types_tab[maptype]->last = todel->next;
-
 	munmap(todel, map_full_size);
 	todel = NULL;
 }
@@ -59,15 +57,15 @@ static void		browse_found_map(t_map **map, t_block *to_free, int maptype)
 
 	is_updated = 0;
 	to_free->free = TRUE;
-	block = (*map)->block; // NO MAPS BLOCK
+	block = (*map)->block;
 	while (block)
 	{
 		is_updated = update_map_blocks(block);
 		if (maptype == LARGE ||
-			(block->free && !block->next && block == (*map)->block)) // NE RENTRE PAS DANS LA CDT
+			(block->free && !block->next && block == (*map)->block))
 		{
 			mumnmap_and_update_maps(map, maptype);
-			return;
+			return ;
 		}
 		if (is_updated)
 			return ;
@@ -78,35 +76,37 @@ static void		browse_found_map(t_map **map, t_block *to_free, int maptype)
 static int		find_map(t_map **map, void *ptr, size_t page)
 {
 	int		maptype;
+	void	*cur_page_addr;
 
 	maptype = (*map)->type;
-  	if ((long)((void*)*map + getpagesize() * page) == ((long)ptr & 0xFFFFFFFFF000)) // remove FFF on macOS
-  	{
-	 	browse_found_map(map, ptr - BLOCK_SIZE, maptype);
-		return TRUE;
+	cur_page_addr = (void*)*map + getpagesize() * page;
+	if ((long)cur_page_addr == ((long)ptr & 0xFFFFFFFFF000))
+	{
+		browse_found_map(map, ptr - BLOCK_SIZE, maptype);
+		return (TRUE);
 	}
 	else if (maptype != LARGE && (*map)->page_count > (size_t)page - 1)
-		return find_map(map, ptr, page + 1);
+		return (find_map(map, ptr, page + 1));
 	else if ((*map)->next)
-		return find_map(&(*map)->next, ptr, 0);
-	return FALSE;
+		return (find_map(&(*map)->next, ptr, 0));
+	return (FALSE);
 }
 
-void			free(void *ptr)
+void			ts_free(void *ptr)
 {
 	int		type;
-	ft_putstr("\nf(free), addr: "); ft_putnbr_base((long)ptr, 16);
 
+	ft_putstr("\nf(free), addr: ");
+	ft_putnbr_base((long)ptr, 16);
 	type = 0;
 	if (ptr == NULL)
-		return; 
+		return ;
 	while (type < MAX_TYPE)
 	{
-		if (g_types_tab[type]) {
+		if (g_types_tab[type])
+		{
 			if (find_map(&g_types_tab[type], ptr, 0))
-			{
-				return;
-			}
+				return ;
 		}
 		type++;
 	}

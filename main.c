@@ -1,4 +1,4 @@
-#include "../includes/malloc.h"
+#include "includes/malloc.h"
 
 void	ft_strlcpy(char *str, int len, char c)
 {

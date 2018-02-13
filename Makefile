@@ -18,13 +18,17 @@ NAME = libft_malloc.so
 
 NAME_LINK = libft_malloc_$(HOSTTYPE).so
 
-SRCS =	srcs/malloc.c \
+SRCS =	srcs/thread_safe.c \
+		srcs/malloc.c \
 		srcs/free.c \
 		srcs/realloc.c \
+		srcs/reallocf.c \
+		srcs/calloc.c \
 		srcs/maps.c \
 		srcs/blocks.c \
 		srcs/utils.c \
-		srcs/show_alloc_mem.c
+		srcs/show_alloc_mem.c \
+		srcs/show_alloc_mem_hex.c		
 
 INC_PATH = includes/
 

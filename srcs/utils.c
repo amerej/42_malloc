@@ -12,7 +12,7 @@
 
 #include "../includes/malloc.h"
 
-int			get_type(size_t size)
+int		get_type(size_t size)
 {
 	if (size <= TINY_SIZE)
 		return (TINY);
@@ -22,7 +22,7 @@ int			get_type(size_t size)
 		return (LARGE);
 }
 
-size_t		get_size(size_t size)
+size_t	get_size(size_t size)
 {
 	if (size <= TINY_SIZE)
 		return (TINY_SIZE);
@@ -32,17 +32,15 @@ size_t		get_size(size_t size)
 		return (size);
 }
 
-void		ft_putchar(char c)
+void	ft_putchar(char c)
 {
-	// return ;
 	write(2, &c, 1);
 }
 
 void	ft_putstr(char *str)
 {
-	// return;
 	size_t i;
-	
+
 	i = 0;
 	while (str[i])
 		++i;
@@ -51,7 +49,6 @@ void	ft_putstr(char *str)
 
 void	ft_putnbr_base(long nb, int base)
 {
-	// return;
 	char	*str;
 
 	str = "0123456789ABCDEF";

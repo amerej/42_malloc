@@ -14,7 +14,7 @@
 
 static void		print_blocks(t_block *block)
 {
-	ft_putstr("\t\tH: 0x");			
+	ft_putstr("\t\tH: 0x");
 	ft_putnbr_base((long)block, 16);
 	ft_putstr(" => B: 0x");
 	ft_putnbr_base((long)block->ptr, 16);
@@ -33,7 +33,7 @@ static void		print_maps(t_map *map, size_t count)
 	ft_putstr("\tmap");
 	ft_putnbr_base((long)count, 10);
 	ft_putstr(" - addr: ");
-	ft_putnbr_base((long)map, 16);	
+	ft_putnbr_base((long)map, 16);
 	ft_putstr("\n");
 	if (map->block)
 		print_blocks(map->block);
@@ -49,28 +49,27 @@ static t_bool	print_header(t_map *head, char *str_type)
 	{
 		ft_putstr(str_type);
 		ft_putstr(" : NULL, no allocated map\n");
-		return FALSE;
+		return (FALSE);
 	}
 	ft_putstr(str_type);
 	ft_putstr(": 0x");
 	ft_putnbr_base((long)head, 16);
 	ft_putstr("\n");
-	return TRUE;
+	return (TRUE);
 }
 
-static void	print_alloc_mem_type(int type, char *str_type)
+static void		print_alloc_mem_type(int type, char *str_type)
 {
 	if (!print_header(g_types_tab[type], str_type))
-		return;
+		return ;
 	print_maps(g_types_tab[type], 0);
 }
 
-void		show_alloc_mem(void)
+void			show_alloc_mem(void)
 {
-	// return;
 	ft_putstr("\n");
 	print_alloc_mem_type(TINY, "TINY");
-	ft_putstr("\n");	
+	ft_putstr("\n");
 	print_alloc_mem_type(SMALL, "SMALL");
 	ft_putstr("\n");
 	print_alloc_mem_type(LARGE, "LARGE");

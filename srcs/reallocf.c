@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calloc.c                                           :+:      :+:    :+:   */
+/*   reallocf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,24 +12,20 @@
 
 #include "../includes/malloc.h"
 
-static void		ft_bzero(void *s, size_t n)
+void			*ts_reallocf(void *ptr, size_t size)
 {
-	size_t	i;
+	void	*reallocated_ptr;
 
-	i = 0;
-	while (i++ < n)
-		*(char *)s++ = 0;
-}
-void			*ts_calloc(size_t count, size_t size)
-{
-	void	*ptr;
-
-	ptr = NULL;
-	if (!count)
-		count = 1;
-	if (!size)
-		size = 1;
-	if ((ptr = ts_malloc(count * size)))
-		ft_bzero(ptr, get_size(count * size));
-	return (ptr);
+	ft_putstr("\nf(reallocf), ptr: ");
+	ft_putnbr_base((long)ptr, 16);
+	ft_putstr(" , size : ");
+	ft_putnbr_base((long)size, 10);
+	if (size == 0)
+	{
+		ts_free(ptr);
+		return (NULL);
+	}
+	else if ((reallocated_ptr = ts_realloc(ptr, size)))
+		ts_free(ptr);
+	return (reallocated_ptr);
 }
