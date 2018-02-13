@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/malloc.h"
+#include "malloc.h"
 
 static void		init_map(t_map **map, size_t mapsize, t_map *prevmap, int type)
 {

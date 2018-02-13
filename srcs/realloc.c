@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/malloc.h"
+#include "malloc.h"
 
 static void		*ft_memcpy(void *dst, const void *src, size_t len)
 {
@@ -93,15 +93,11 @@ static void		*find_map(t_map **map, void *ptr, size_t size, int page)
 	return (NULL);
 }
 
-void			*realloc(void *ptr, size_t size)
+void			*ts_realloc(void *ptr, size_t size)
 {
 	int		type;
 	void	*reallocated_ptr;
 
-	ft_putstr("\nf(realloc), ptr: ");
-	ft_putnbr_base((long)ptr, 16);
-	ft_putstr(" , size : ");
-	ft_putnbr_base((long)size, 10);
 	type = 0;
 	reallocated_ptr = NULL;
 	if (ptr == NULL)
@@ -117,15 +113,9 @@ void			*realloc(void *ptr, size_t size)
 		if (g_types_tab[type])
 		{
 			if ((reallocated_ptr = find_map(&g_types_tab[type], ptr, size, 0)))
-			{
-				ft_putstr("\nf(realloc) RETURN: ");
-				ft_putnbr_base((long)reallocated_ptr, 16);
 				return (reallocated_ptr);
-			}
 		}
 		type++;
 	}
-	ft_putstr("\nf(realloc) NOTHING FOUND: ");
-	ft_putnbr_base((long)ptr, 16);
-	return (NULL);
+	return (ptr);
 }

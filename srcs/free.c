@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/malloc.h"
+#include "malloc.h"
 
 static int		update_map_blocks(t_block *block)
 {
@@ -96,8 +96,6 @@ void			ts_free(void *ptr)
 {
 	int		type;
 
-	ft_putstr("\nf(free), addr: ");
-	ft_putnbr_base((long)ptr, 16);
 	type = 0;
 	if (ptr == NULL)
 		return ;

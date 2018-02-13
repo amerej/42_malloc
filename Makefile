@@ -23,12 +23,12 @@ SRCS =	srcs/thread_safe.c \
 		srcs/free.c \
 		srcs/realloc.c \
 		srcs/reallocf.c \
-		srcs/calloc.c \
 		srcs/maps.c \
 		srcs/blocks.c \
 		srcs/utils.c \
 		srcs/show_alloc_mem.c \
-		srcs/show_alloc_mem_hex.c		
+		srcs/show_alloc_mem_hex.c \
+		srcs/calloc.c
 
 INC_PATH = includes/
 
@@ -36,7 +36,7 @@ OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wextra -Wall -fpic -ggdb -I$(INC_PATH)
+CFLAGS = -Wextra -Wall -fpic -I$(INC_PATH)
 
 .PHONY: all, clean, fclean, re
 

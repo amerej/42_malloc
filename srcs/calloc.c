@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/malloc.h"
+#include "malloc.h"
 
 static void		ft_bzero(void *s, size_t n)
 {
@@ -20,6 +20,7 @@ static void		ft_bzero(void *s, size_t n)
 	while (i++ < n)
 		*(char *)s++ = 0;
 }
+
 void			*ts_calloc(size_t count, size_t size)
 {
 	void	*ptr;

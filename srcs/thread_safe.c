@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/malloc.h"
+#include "malloc.h"
 
 pthread_mutex_t	g_mutex = PTHREAD_MUTEX_INITIALIZER;
 
@@ -51,12 +51,12 @@ void			*reallocf(void *ptr, size_t size)
 	return (new_ptr);
 }
 
-void			*calloc(size_t count, size_t size)
-{
-	void	*new_ptr;
+// void			*calloc(size_t count, size_t size)
+// {
+// 	void	*new_ptr;
 
-	pthread_mutex_lock(&g_mutex);
-	new_ptr = ts_calloc(count, size);
-	pthread_mutex_unlock(&g_mutex);
-	return (new_ptr);
-}
+// 	pthread_mutex_lock(&g_mutex);
+// 	new_ptr = ts_calloc(count, size);
+// 	pthread_mutex_unlock(&g_mutex);
+// 	return (new_ptr);
+// }

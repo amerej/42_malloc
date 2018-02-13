@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/malloc.h"
+#include "malloc.h"
 
 /*
 ** TYPEOF(t_map) defined in malloc.h as an extern variable
@@ -50,8 +50,6 @@ void	*ts_malloc(size_t size)
 	int				type;
 	struct rlimit	rt;
 
-	ft_putstr("\nf(MALLOC), size ");
-	ft_putnbr_base((long)size, 10);
 	if (!size || getrlimit(RLIMIT_AS, &rt) || rt.rlim_max < size)
 		return (NULL);
 	size = get_size(size);
@@ -60,8 +58,5 @@ void	*ts_malloc(size_t size)
 		return (NULL);
 	if (!(block = get_block(map_lst, type, size)))
 		return (NULL);
-	ft_putstr("\nmalloc return -- &block->ptr: ");
-	ft_putnbr_base((long)block->ptr, 16);
-	ft_putstr("\n");
 	return (block->ptr);
 }
