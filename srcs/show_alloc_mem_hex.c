@@ -1,44 +1,73 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show_alloc_mem.c                                   :+:      :+:    :+:   */
+/*   show_alloc_mem_hex.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpoblon <gpoblon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:33:53 by gpoblon           #+#    #+#             */
-/*   Updated: 2018/02/04 16:39:58 by gpoblon          ###   ########.fr       */
+/*   Updated: 2018/02/14 13:04:42 by gpoblon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-static void		print_blocks(t_block *block)
+void		put_memory_maj_off(unsigned int nb, int nbr)
 {
-	ft_putstr("\t\tH: 0x");
-	ft_putnbr_base((long)block, 16);
-	ft_putstr(" => B: 0x");
+	char	*str;
+
+	str = "0123456789ABCDEF";
+	if (nbr > 0)
+		put_memory_maj_off(nb / 16, --nbr);
+	ft_putchar(str[nb % 16]);
+}
+
+static void	print_hexa(char *ptr, size_t size)
+{
+	size_t	i;
+
+	i = 1;
+	while (i <= size)
+	{
+		put_memory_maj_off(ptr[i], 1);
+		if (!(i % 16))
+			ft_putchar('\n');
+		else
+			ft_putchar(' ');
+		++i; 
+	}
+	ft_putchar('\n');
+}
+
+static void		print_block_content(t_block *block)
+{
+	print_hex((char *)list->ptr, list->size);
+}
+
+static void		print_block_addr(t_block *block)
+{
+	ft_putstr("\t\tBLOCK : 0x");
 	ft_putnbr_base((long)block->ptr, 16);
 	ft_putstr(" - 0x");
 	ft_putnbr_base((long)(block->ptr + block->size), 16);
 	ft_putstr(" : ");
 	ft_putnbr_base(block->size, 10);
-	ft_putstr(" octets, ");
+	ft_putstr(" octets");
 	(block->free) ? ft_putstr("free: TRUE\n") : ft_putstr("free: FALSE\n");
+	print_block_content(block);
 	if (block->next)
-		print_blocks(block->next);
+		print_block_addr(block->next);
 }
 
 static void		print_maps(t_map *map, size_t count)
 {
-	ft_putstr("\tmap");
+	ft_putstr("\tMAP : ");
 	ft_putnbr_base((long)count, 10);
-	ft_putstr(" - addr: ");
+	ft_putstr(" - addr : ");
 	ft_putnbr_base((long)map, 16);
 	ft_putstr("\n");
 	if (map->block)
 		print_blocks(map->block);
-	else
-		ft_putstr("THERE MUST BE AN ERROR: NO EXISTING BLOCKS IN MAP\n");
 	if (map->next)
 		print_maps(map->next, ++count);
 }
