@@ -87,6 +87,7 @@ t_block					*create_block(t_map *map, size_t size,
 int						get_type(size_t size);
 size_t					get_size(size_t size);
 
+void					ft_putchar(char c);
 void					ft_putstr(char *str);
 void					ft_putnbr_base(long n, int base);
 

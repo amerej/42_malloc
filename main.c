@@ -1,4 +1,9 @@
 #include "includes/malloc.h"
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+# define SIZE 	1500
 
 void	ft_strlcpy(char *str, int len, char c)
 {
@@ -12,13 +17,16 @@ void	ft_strlcpy(char *str, int len, char c)
 	str[i] = '\0';
 }
 
-int main (int argc, char** argv)
+/*
+** 16 small malloc realloc free
+** 17 big malloc realloc free
+** 19 thousand small realloc free
+** 20 ten big malloc realloc free
+*/
+
+int main (void)
 {
-	char *str1 = (char*)malloc(1);
-	char *str2 = (char*)malloc(7);
-	char *str3 = (char*)malloc(10);
-	show_alloc_mem_hex();
+	char *str1 = (char*)malloc(1500);
+	str1 = realloc(str1, 1500);
 	free(str1);
-	free(str2);
-	free(str3);
 }

@@ -49,8 +49,6 @@ static void		*update_malloc(t_map **map, t_block *block, size_t size)
 		if (new_ptr != NULL)
 			ft_memcpy(new_ptr, block->ptr,
 				block->size < size ? block->size : size);
-		else
-			exit(1);
 		ts_free(block->ptr);
 		return (new_ptr);
 	}

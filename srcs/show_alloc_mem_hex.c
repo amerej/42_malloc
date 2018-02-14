@@ -12,7 +12,7 @@
 
 #include "malloc.h"
 
-void		put_memory_maj_off(unsigned int nb, int nbr)
+static void		put_memory_maj_off(unsigned int nb, int nbr)
 {
 	char	*str;
 
@@ -22,7 +22,7 @@ void		put_memory_maj_off(unsigned int nb, int nbr)
 	ft_putchar(str[nb % 16]);
 }
 
-static void	print_hexa(char *ptr, size_t size)
+static void		print_hexa(char *ptr, size_t size)
 {
 	size_t	i;
 
@@ -34,26 +34,26 @@ static void	print_hexa(char *ptr, size_t size)
 			ft_putchar('\n');
 		else
 			ft_putchar(' ');
-		++i; 
+		++i;
 	}
 	ft_putchar('\n');
 }
 
 static void		print_block_content(t_block *block)
 {
-	print_hex((char *)list->ptr, list->size);
+	print_hexa((char *)block->ptr, block->size);
 }
 
 static void		print_block_addr(t_block *block)
 {
-	ft_putstr("\t\tBLOCK : 0x");
+	ft_putstr("\nBLOCK : 0x");
 	ft_putnbr_base((long)block->ptr, 16);
 	ft_putstr(" - 0x");
 	ft_putnbr_base((long)(block->ptr + block->size), 16);
 	ft_putstr(" : ");
 	ft_putnbr_base(block->size, 10);
-	ft_putstr(" octets");
-	(block->free) ? ft_putstr("free: TRUE\n") : ft_putstr("free: FALSE\n");
+	ft_putstr(" octets - ");
+	(block->free) ? ft_putstr("FREE\n") : ft_putstr("ALLOCATED\n");
 	print_block_content(block);
 	if (block->next)
 		print_block_addr(block->next);
@@ -61,13 +61,13 @@ static void		print_block_addr(t_block *block)
 
 static void		print_maps(t_map *map, size_t count)
 {
-	ft_putstr("\tMAP : ");
+	ft_putstr("\nMAP : ");
 	ft_putnbr_base((long)count, 10);
 	ft_putstr(" - addr : ");
 	ft_putnbr_base((long)map, 16);
 	ft_putstr("\n");
 	if (map->block)
-		print_blocks(map->block);
+		print_block_addr(map->block);
 	if (map->next)
 		print_maps(map->next, ++count);
 }
