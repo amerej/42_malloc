@@ -12,36 +12,26 @@
 
 #include "malloc.h"
 
-static void		put_memory_maj_off(unsigned int nb, int nbr)
-{
-	char	*str;
-
-	str = "0123456789ABCDEF";
-	if (nbr > 0)
-		put_memory_maj_off(nb / 16, --nbr);
-	ft_putchar(str[nb % 16]);
-}
-
 static void		print_hexa(char *ptr, size_t size)
 {
 	size_t	i;
+	char	*str;
+	unsigned char	nb;
 
-	i = 1;
-	while (i <= size)
+	i = 0;
+	str = "0123456789ABCDEF";
+	nb = 0;
+	while (++i <= size)
 	{
-		put_memory_maj_off(ptr[i], 1);
-		if (!(i % 16))
-			ft_putchar('\n');
-		else
+		nb = ptr[i];
+		ft_putchar(str[nb % 16]);
+		ft_putchar(str[(nb / 16) % 16]);
+		if (i % 16)
 			ft_putchar(' ');
-		++i;
+		else
+			ft_putchar('\n');
 	}
 	ft_putchar('\n');
-}
-
-static void		print_block_content(t_block *block)
-{
-	print_hexa((char *)block->ptr, block->size);
 }
 
 static void		print_block_addr(t_block *block)
@@ -54,7 +44,7 @@ static void		print_block_addr(t_block *block)
 	ft_putnbr_base(block->size, 10);
 	ft_putstr(" octets - ");
 	(block->free) ? ft_putstr("FREE\n") : ft_putstr("ALLOCATED\n");
-	print_block_content(block);
+	print_hexa((char *)block->ptr, block->size);
 	if (block->next)
 		print_block_addr(block->next);
 }
@@ -72,25 +62,18 @@ static void		print_maps(t_map *map, size_t count)
 		print_maps(map->next, ++count);
 }
 
-static t_bool	print_header(t_map *head, char *str_type)
+static void		print_alloc_mem_type(int type, char *str_type)
 {
-	if (!head)
+	if (!g_types_tab[type])
 	{
 		ft_putstr(str_type);
 		ft_putstr(" : NULL, no allocated map\n");
-		return (FALSE);
+		return ;
 	}
 	ft_putstr(str_type);
 	ft_putstr(": 0x");
-	ft_putnbr_base((long)head, 16);
+	ft_putnbr_base((long)g_types_tab[type], 16);
 	ft_putstr("\n");
-	return (TRUE);
-}
-
-static void		print_alloc_mem_type(int type, char *str_type)
-{
-	if (!print_header(g_types_tab[type], str_type))
-		return ;
 	print_maps(g_types_tab[type], 0);
 }
 

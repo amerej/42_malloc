@@ -26,7 +26,7 @@ void	ft_strlcpy(char *str, int len, char c)
 
 int main (void)
 {
-	char *str1 = (char*)malloc(1500);
-	str1 = realloc(str1, 1500);
+	char *str1 = (char*)malloc(1);
+	show_alloc_mem_hex();
 	free(str1);
 }
